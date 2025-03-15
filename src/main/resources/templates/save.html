@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{common :: head}"></head>
+
+<body>
+	<nav th:replace="~{common :: navbar}"></nav>
+	<div class="container mt-5">
+		<h2>植物の登録</h2>
+		<div class="row">
+			<div class="col-md-12">
+				<form action="" method="post" th:object="${plant}">
+
+					<div class="container d-flex justify-content-center">
+						<div class="form-container">
+
+							<div class="form-group mb-3 text-start">
+								<label for="formLocation">Category</label>
+								<select th:field="*{location.id}" id="formLocation" class="form-control text-start">
+									<option th:each="loc : ${locationList}" th:value="${loc.id}">[[${loc.name}]]
+									</option>
+								</select>
+							</div>
+
+							<div class="alert alert-danger text-start" th:errors="*{plantCpl}"></div>
+							<div class="form-group mb-3 text-start">
+								<label for="formPlantCpl">PlantID</label>
+								<input type="text" th:field="*{plantCpl}" id="formPlantCpl"
+									class="form-control text-start" />
+							</div>
+
+							<div class="alert alert-danger text-start" th:errors="*{plantName}"></div>
+							<div class="form-group mb-3 text-start">
+								<label for="formPlantName">植物名</label>
+								<input type="text" th:field="*{plantName}" id="formPlantName"
+									class="form-control text-start" />
+							</div>
+
+							<div class="alert alert-danger text-start" th:errors="*{japaneseName}"></div>
+							<div class="form-group mb-3 text-start">
+								<label for="formJapaneseName">和名</label>
+								<input type="text" th:field="*{japaneseName}" id="formJapaneseName"
+									class="form-control text-start" />
+							</div>
+
+							<div class="alert alert-danger text-start" th:errors="*{scientificName}"></div>
+							<div class="form-group mb-3 text-start">
+								<label for="formScientificName">学名</label>
+								<input type="text" th:field="*{scientificName}" id="formScientificName"
+									class="form-control text-start" />
+							</div>
+
+							<div class="alert alert-danger text-start" th:errors="*{genusName}"></div>
+							<div class="form-group mb-3 text-start">
+								<label for="formGenusName">属名</label>
+								<input type="text" th:field="*{genusName}" id="formGenusName"
+									class="form-control text-start" />
+							</div>
+
+							<div class="form-group mb-3 text-start">
+								<label for="formDescription">特徴など</label>
+								<textarea th:field="*{description}" id="formDescription"
+									class="form-control text-start"></textarea>
+							</div>
+
+							<div class="alert alert-danger text-start" th:errors="*{imagePath}"></div>
+							<div class="form-group mb-3 text-start">
+								<label for="formImagePath">画像</label>
+								<input type="text" th:field="*{imagePath}" id="formImagePath"
+									class="form-control text-start"
+									th:value="${imagePath != null ? imagePath : '/uploads/-01.jpg'}" />
+							</div>
+
+							<!-- 画像プレビューを表示 -->
+							<div class="mb-3 text-start">
+								<label>画像プレビュー</label><br>
+								<img id="imagePreview" th:src="${imagePath != null ? imagePath : '/uploads/-01.jpg'}"
+									alt="プレビュー画像" class="img-fluid"
+									style="max-width: 200px; border: 1px solid #ddd; padding: 5px;">
+							</div>
+
+							<script>
+								document.addEventListener("DOMContentLoaded", function () {
+									let imagePathInput = document.getElementById("formImagePath");
+									let imagePreview = document.getElementById("imagePreview");
+
+									imagePathInput.addEventListener("input", function () {
+										imagePreview.src = imagePathInput.value || '/uploads/-01.jpg';
+									});
+								});
+							</script>
+
+						</div>
+					</div>
+
+
+
+					<div class="form-group">
+
+						<a th:href="@{/plants(page=${session.page})}" class="btn btn-secondary">キャンセル</a>
+						<input type="submit" class="btn btn-dark" value="保存" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- /.container -->
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

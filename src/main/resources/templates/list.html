@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{common :: head}"></head>
+  <body>
+    <nav th:replace="~{common :: navbar}"></nav>
+    <div class="container mt-5">
+      <div th:if="${status != null}" class="alert alert-success">
+        [[${status}]]
+      </div>    
+      <h2>観葉植物リスト</h2>
+      <a class="btn btn-dark my-4" th:href="@{/plants/add}">観葉植物の追加</a>
+      <div class="center-container">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-bordered table-hover list-table">
+            <thead>
+              <tr class="bg-secondary text-white">
+                <th>ID</th>
+                <th>category</th>
+                <th>植物名</th>
+                <th>詳細</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="align-middle"
+                  th:each="plant : ${plantList}"
+                  th:object="${plant}">
+                <td>[[*{id}]]</td>
+                <td>[[*{location.name}]]</td>
+                <td>[[*{plantName}]]</td>
+                <td><a class="btn btn-light" th:href="@{/plants/detail/{id}(id=*{id})}">＞</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <th:block th:insert="~{common :: pagination(${page}, ${totalPages})}"></th:block>
+      </div>
+    </div>  
+    </div>
+    <!-- /.container -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  </body>
+</html>

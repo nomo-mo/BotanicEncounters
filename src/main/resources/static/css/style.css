@@ -1,0 +1,223 @@
+@charset "UTF-8";
+
+body {
+ 
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.bk {
+    background: rgb(208, 210, 208);
+    margin-bottom: 50px;
+    padding: 20px;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+h1 {
+    margin: 0;
+    padding-top: 30px; 
+    padding-bottom: 10px;
+    font-weight: normal;
+    color: rgb(87, 88, 84);
+    font-size: 40px;
+    color: #fff; /* リリーフ */
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.6)
+    
+}
+
+h2{
+	margin-bottom: 2rem;
+}
+
+
+h6 {
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 50px;
+}
+
+.row{
+	padding-top: 20px; /* カテゴリーと画像のスペース */
+}
+
+.navbar svg {
+  position: relative;
+  bottom: 2px;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center; 
+}
+
+.detail-table {
+    margin: auto;
+}
+
+.detail-table {
+  table-layout: fixed;
+  max-width: 700px;
+}
+
+.detail-table th {
+  width: 100px;
+}
+
+.detail-table .note {
+  font-family: "メイリオ", sans-serif;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.form-container {
+    max-width: 700px; /* フォームの幅を縮める */
+    width: 100%;
+    padding: 20px;
+    background: #f8f9fa; /* 背景色を淡いグレーにする */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group{
+	padding-top: 20px;
+}
+
+
+
+/* 画像 */
+.carousel-item img {
+    margin: 0 auto; /* 画像を中央配置 */
+    display: block; /* ブロック要素として扱う */
+    margin: 10px auto; /* 上下に10pxの余白をつけて中央配置 */
+    padding: 10px; /* 内側の余白を追加 */
+    max-width: 80%; /* 画像の最大幅を80%に設定して狭める */
+    height: auto; /* 高さを自動調整 */
+    border-radius: 10px; /* 角を丸める（オプション） */
+}
+
+/* ページネーション */
+.pagination-container {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.pagination {
+    display: inline-flex;
+    list-style: none;
+    padding: 0;
+    background: black;
+    border-radius: 5px;
+}
+
+.page-item {
+    margin: 0;
+}
+
+.page-link {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.page-link:hover {
+    background: white;
+    color: black;
+}
+
+.active .page-link {
+    background: white;
+    color: black;
+    font-weight: bold;
+}
+
+.disabled .page-link {
+    color: rgb(64, 0, 64);
+    pointer-events: none;
+}
+
+.pagination-next {
+    margin-bottom: 10px;
+}
+
+.pagination-next-link {
+    display: inline-block;
+    padding: 10px 15px;
+    background: rgb(64, 64, 64);
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.pagination-next-link:hover {
+    background: white;
+    color: black;
+}
+
+.disabled .pagination-next-link {
+    background: gray;
+    color: lightgray;
+    pointer-events: none;
+}
+/* ここまでページネーション */
+
+
+/* ボタン */
+.custom-button {
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  border: solid 1px #333;
+  padding: 35px 40px;
+  position: relative;
+  font-size: 16px;
+  font-weight: bold;
+  background: transparent;
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  z-index: 1000; /* 他の要素より前面に */
+}
+
+.custom-button::before,
+.custom-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -7px;
+  height: 1px;
+  background-color: #333;
+}
+
+.custom-button::before {
+  width: 60px;
+  transform: translate(30px, 0px);
+}
+
+.custom-button::after {
+  width: 15px;
+  transform-origin: right center;
+  transform: translate(30px, 0px) rotate(25deg);
+}
+/* ボタン */
+
+.shadow-image {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 5px; /* 角丸の調整（オプション） */
+}
+
+.card-title {
+    text-decoration: none; /* 下線を消す */
+    color: inherit; /* リンクのデフォルトの色を継承（オプション） */
+}
+
+.card-title:hover {
+    text-decoration: underline; /* ホバー時のみ下線を表示（オプション） */
+}
+
+	
+
+
+

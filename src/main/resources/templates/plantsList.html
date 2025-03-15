@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+	<title>Plant一覧</title>
+</head>
+
+<body style="background-color: rgb(202, 206, 205);">
+	<nav th:replace="~{commonP :: navbar}"></nav>
+	<div class="container my-5">
+		<header class="d-flex justify-content-between align-items-center mb-4">
+			<h2>PlantsList</h2>
+		</header>
+
+		<form th:action="@{/plants/category}" method="get">
+			<label for="category">カテゴリー選択：</label>
+			<select name="category" id="category">
+				<option value="観葉植物">観葉植物</option>
+				<option value="花">花</option>
+				<option value="植栽">植栽</option>
+				<option value="フェイク">フェイク</option>
+				<option value="azumamakoto">azumamakoto</option>
+			</select>
+			<button type="submit" class="btn btn-dark">検索</button>
+			<style>
+				.selected-category {
+					font-weight: bold;
+					font-size: 1.2em;
+					color: rgb(0, 64, 64);
+				}
+			</style>
+			<p>選択中のカテゴリー: <span th:text="${selectedCategory}" class="selected-category"></span></p>
+		</form>
+
+		<div class="row">
+			
+			<!-- 植物リストの繰り返し表示 -->
+			<div class="col-md-2 mb-4" th:each="plant : ${plants}">
+				<div class="wrapper">
+					<div class="card">
+						<img class="shadow-image" th:src="@{${plant.imagePath}}" alt="Plant Image">
+					</div>
+				</div>
+				<a th:href="@{/detail/{id}(id=${plant.id})}" class="card-title" th:text="${plant.plantName}"></a>
+			</div>
+		</div>
+	</div>
+
+	<footer class="text-center py-3">
+		<p>&copy; 2025 Indoor Plants</p>
+	</footer>
+
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
