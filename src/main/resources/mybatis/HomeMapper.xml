@@ -11,47 +11,47 @@
 
     <select id="selectAll" resultMap="homeMap">
 		SELECT
-		 plants.id,  
+		 botanicals.id,  
 		 locations.id AS location_id, 
 		 locations.name AS location_name,
-		 plants.plant_cpl, 
-		 plants.plant_name,
-		 plants.japanese_name, 
-		 plants.scientific_name, 
-		 plants.genus_name,
-		 plants.description, 
-		 plants.image_path
-		FROM plants
+		 botanicals.botanic_cpl, 
+		 botanicals.botanic_name,
+		 botanicals.japanese_name, 
+		 botanicals.scientific_name, 
+		 botanicals.genus_name,
+		 botanicals.description, 
+		 botanicals.image_path
+		FROM botanicals
 		JOIN locations
-		  ON plants.location_id = locations.id
+		  ON botanicals.location_id = locations.id
 	</select>
 
  
 
     <select id="selectById" resultMap="homeMap" parameterType="int">
        SELECT
-		 plants.id,  
+		 botanicals.id,  
 		 locations.id AS location_id, 
 		 locations.name AS location_name,
-		 plants.plant_cpl, 
-		 plants.plant_name,
-		 plants.japanese_name, 
-		 plants.scientific_name, 
-		 plants.genus_name,
-		 plants.description, 
-		 plants.image_path
-		FROM plants
+		 botanicals.botanic_cpl, 
+		 botanicals.botanic_name,
+		 botanicals.japanese_name, 
+		 botanicals.scientific_name, 
+		 botanicals.genus_name,
+		 botanicals.description, 
+		 botanicals.image_path
+		FROM botanicals
 		JOIN locations
-		ON plants.location_id = locations.id
-		WHERE plants.id = #{id}
+		  ON botanicals.location_id = locations.id
+		WHERE botanicals.id = #{id}
     </select>
     
     <select id="selectByCategory" resultMap="homeMap" parameterType="string">
-        SELECT plants.id, locations.id AS location_id, locations.name AS location_name,
-               plants.plant_cpl, plants.plant_name, plants.japanese_name, plants.scientific_name, 
-               plants.genus_name, plants.description, plants.image_path
-        FROM plants
-        JOIN locations ON plants.location_id = locations.id
+        SELECT botanicals.id, locations.id AS location_id, locations.name AS location_name,
+               botanicals.botanic_cpl, botanicals.botanic_name, botanicals.japanese_name, botanicals.scientific_name, 
+               botanicals.genus_name, botanicals.description, botanicals.image_path
+        FROM botanicals
+        JOIN locations ON botanicals.location_id = locations.id
         WHERE locations.name = #{category}
     </select>
 

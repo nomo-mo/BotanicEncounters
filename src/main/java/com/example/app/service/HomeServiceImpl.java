@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.app.domain.Botanic;
 import com.example.app.domain.Home;
 import com.example.app.domain.Location;
-import com.example.app.domain.Plant;
 import com.example.app.mapper.HomeMapper;
 import com.example.app.mapper.LocationMapper;
 
@@ -21,13 +21,13 @@ public class HomeServiceImpl implements HomeService{
 
 
 	@Override
-	public List<Plant> getAllPlants() {
+	public List<Botanic> getAllBotanicals() {
 		return homeMapper.selectAll();
 		
 	}
 
 	@Override
-	public Home getPlantById(Integer id) {
+	public Home getBotanicById(Integer id) {
 		if(id == null) {
 			return null;
 		}
@@ -35,12 +35,12 @@ public class HomeServiceImpl implements HomeService{
 		return homeMapper.selectById(id);
 	}
 	@Override
-	public List<Location> getPlantLocations() {
+	public List<Location> getBotanicLocations() {
 		return locationMapper.selectAll();
 	}
 
 	@Override
-	public List<Plant> getPlantsByCategory(String category) {
+	public List<Botanic> getBotanicalsByCategory(String category) {
 		 return homeMapper.selectByCategory(category);
 	}
 

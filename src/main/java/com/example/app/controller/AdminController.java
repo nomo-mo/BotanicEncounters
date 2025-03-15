@@ -41,8 +41,8 @@ public class AdminController {
 		
 		session.setAttribute("authAdmin", authAdmin);		     // HttpSession に認証済み管理者情報を保存し、ログイン状態を維持		
 		ra.addFlashAttribute("status", "ログインしました");
-		System.out.println("ログイン成功！/plants へリダイレクト"); // デバッグログ
-		return "redirect:/plants";                               // /plants へリダイレクト（ログイン後のページ）
+		System.out.println("ログイン成功！/botanicals へリダイレクト"); // デバッグログ
+		return "redirect:/botanicals";                               // /plants へリダイレクト（ログイン後のページ）
 	}
 	
 	@GetMapping("/admin/logout")

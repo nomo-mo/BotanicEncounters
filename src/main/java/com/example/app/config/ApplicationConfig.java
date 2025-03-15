@@ -34,7 +34,7 @@ public class ApplicationConfig implements WebMvcConfigurer {
     @Bean
     FilterRegistrationBean<AdminAuthFilter> adminAuthFilter() {
         var bean = new FilterRegistrationBean<AdminAuthFilter>(new AdminAuthFilter());
-        bean.addUrlPatterns("/plants/*");
+        bean.addUrlPatterns("/botanicals/*");
         return bean;
     }
     

@@ -9,7 +9,7 @@
 		<h2>植物の編集</h2>
 		<div class="row">
 			<div class="col-md-12">
-				<form action="" method="post" th:object="${plant}">
+				<form action="" method="post" th:object="${botanic}">
 
 					<div class="container d-flex justify-content-center">
 						<div class="form-container">
@@ -22,16 +22,16 @@
 								</select>
 							</div>
 
-							<div class="alert alert-danger" th:errors="*{plantCpl}"></div>
+							<div class="alert alert-danger" th:errors="*{BotanicCpl}"></div>
 							<div class="form-group mb-3 text-start">
-								<label for="formPlantCpl">PlantID</label>
-								<input type="text" th:field="*{plantCpl}" id="formPlantCpl" class="form-control" />
+								<label for="formBotanicCpl">BotanicID</label>
+								<input type="text" th:field="*{BotanicCpl}" id="formBotanicCpl" class="form-control" />
 							</div>
 
-							<div class="alert alert-danger" th:errors="*{plantName}"></div>
+							<div class="alert alert-danger" th:errors="*{BotanicName}"></div>
 							<div class="form-group mb-3 text-start">
-								<label for="formPlantName">植物名</label>
-								<input type="text" th:field="*{plantName}" id="formPlantName" class="form-control" />
+								<label for="formBotanicName">植物名</label>
+								<input type="text" th:field="*{BotanicName}" id="formBotanicName" class="form-control" />
 							</div>
 
 							<div class="alert alert-danger" th:errors="*{japaneseName}"></div>
@@ -67,7 +67,7 @@
 							</div>
 
 							<div class="form-group">
-								<a th:href="@{/plants/detail/{id}(id=*{id})}" class="btn btn-secondary">キャンセル</a>
+								<a th:href="@{/botanicals/detail/{id}(id=*{id})}" class="btn btn-secondary">キャンセル</a>
 							    <input type="submit" class="btn btn-dark" value="保存" />
 							</div>
 				</form>

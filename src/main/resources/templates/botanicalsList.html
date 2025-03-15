@@ -6,17 +6,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
-	<title>Plant一覧</title>
+	<title>Botanic一覧</title>
 </head>
 
 <body style="background-color: rgb(202, 206, 205);">
 	<nav th:replace="~{commonP :: navbar}"></nav>
 	<div class="container my-5">
 		<header class="d-flex justify-content-between align-items-center mb-4">
-			<h2>PlantsList</h2>
+			<h2>BotanicList</h2>
 		</header>
 
-		<form th:action="@{/plants/category}" method="get">
+		<form th:action="@{/botanicals/category}" method="get">
 			<label for="category">カテゴリー選択：</label>
 			<select name="category" id="category">
 				<option value="観葉植物">観葉植物</option>
@@ -39,19 +39,19 @@
 		<div class="row">
 			
 			<!-- 植物リストの繰り返し表示 -->
-			<div class="col-md-2 mb-4" th:each="plant : ${plants}">
+			<div class="col-md-2 mb-4" th:each="botanic : ${botanicals}">
 				<div class="wrapper">
 					<div class="card">
-						<img class="shadow-image" th:src="@{${plant.imagePath}}" alt="Plant Image">
+						<img class="shadow-image" th:src="@{${botanic.imagePath}}" alt="Botanic Image">
 					</div>
 				</div>
-				<a th:href="@{/detail/{id}(id=${plant.id})}" class="card-title" th:text="${plant.plantName}"></a>
+				<a th:href="@{/detail/{id}(id=${botanic.id})}" class="card-title" th:text="${botanic.botanicName}"></a>
 			</div>
 		</div>
 	</div>
 
 	<footer class="text-center py-3">
-		<p>&copy; 2025 Indoor Plants</p>
+		<p>&copy; 2025 Botanic Encounters</p>
 	</footer>
 
 	<script src="js/jquery-2.1.4.min.js"></script>

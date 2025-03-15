@@ -7,8 +7,8 @@ public class Home {
 	
 	private Integer id;
 	private Location location;
-	private String plantCpl;
-	private String plantName;
+	private String botanicCpl;
+	private String botanicName;
 	private String japaneseName;
 	private String scientificName;
 	private String genusName;

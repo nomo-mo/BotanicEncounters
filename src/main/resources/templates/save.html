@@ -9,7 +9,7 @@
 		<h2>植物の登録</h2>
 		<div class="row">
 			<div class="col-md-12">
-				<form action="" method="post" th:object="${plant}">
+				<form action="" method="post" th:object="${botanic}">
 
 					<div class="container d-flex justify-content-center">
 						<div class="form-container">
@@ -22,17 +22,17 @@
 								</select>
 							</div>
 
-							<div class="alert alert-danger text-start" th:errors="*{plantCpl}"></div>
+							<div class="alert alert-danger text-start" th:errors="*{botanicCpl}"></div>
 							<div class="form-group mb-3 text-start">
-								<label for="formPlantCpl">PlantID</label>
-								<input type="text" th:field="*{plantCpl}" id="formPlantCpl"
+								<label for="formBotanicCpl">BotanicID</label>
+								<input type="text" th:field="*{botanicCpl}" id="formBotanicCpl"
 									class="form-control text-start" />
 							</div>
 
-							<div class="alert alert-danger text-start" th:errors="*{plantName}"></div>
+							<div class="alert alert-danger text-start" th:errors="*{botanicName}"></div>
 							<div class="form-group mb-3 text-start">
-								<label for="formPlantName">植物名</label>
-								<input type="text" th:field="*{plantName}" id="formPlantName"
+								<label for="formBotanicName">植物名</label>
+								<input type="text" th:field="*{botanicName}" id="formBotanicName"
 									class="form-control text-start" />
 							</div>
 
@@ -89,15 +89,11 @@
 									});
 								});
 							</script>
-
 						</div>
 					</div>
-
-
-
 					<div class="form-group">
 
-						<a th:href="@{/plants(page=${session.page})}" class="btn btn-secondary">キャンセル</a>
+						<a th:href="@{/botanicals(page=${session.page})}" class="btn btn-secondary">キャンセル</a>
 						<input type="submit" class="btn btn-dark" value="保存" />
 					</div>
 				</form>
@@ -107,5 +103,4 @@
 	<!-- /.container -->
 	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
-
 </html>

@@ -5,16 +5,16 @@
 
 <body>
 	<nav th:replace="~{common :: navbar}"></nav>
-	<div th:if="${plant == null}" class="container mt-5">
-		<div class="alert alert-danger">お探しの観葉植物は存在しません</div>
-		<a class="btn btn-dark my-3" th:href="@{/plants}">リストに戻る</a>
+	<div th:if="${botanic == null}" class="container mt-5">
+		<div class="alert alert-danger">お探しの植物はありません</div>
+		<a class="btn btn-dark my-3" th:href="@{/botanicals}">リストに戻る</a>
 	</div>
 
-	<div th:if="${plant != null}" th:object="${plant}" class="container mt-5">
+	<div th:if="${botanic != null}" th:object="${botanic}" class="container mt-5">
 		<div th:if="${status != null}" class="alert alert-success">
 			[[${status}]]
 		</div>
-		<h2>[[*{plantName}]]</h2>
+		<h2>[[*{botanicName}]]</h2>
 		<div class="row">
 			<div class="col-md-12">
 				<table class="table table-bordered table-hover detail-table">
@@ -28,12 +28,12 @@
 							<td>[[*{location.name}]]</td>
 						</tr>
 						<tr>
-							<th class="bg-secondary text-white">PlantID</th>
-							<td>[[*{plantCpl}]]</td>
+							<th class="bg-secondary text-white">BotanicID</th>
+							<td>[[*{botanicCpl}]]</td>
 						</tr>
 						<tr>
 							<th class="bg-secondary text-white">植物名</th>
-							<td>[[*{plantName}]]</td>
+							<td>[[*{botanicName}]]</td>
 						</tr>
 						<tr>
 							<th class="bg-secondary text-white">和名</th>
@@ -52,7 +52,7 @@
 							<td>[[*{description}]]</td>
 						</tr>
 						<tr>
-							<img th:src="@{${plant.imagePath}}" alt="imagePlant" class="img-fluid" style="margin-bottom: 20px;  max-width: 300px; height: auto;">
+							<img th:src="@{${botanic.imagePath}}" alt="imagebBotanic" class="img-fluid" style="margin-bottom: 20px;  max-width: 300px; height: auto;">
 						</tr>
 						
 						
@@ -61,9 +61,9 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<a id="delete" class="btn btn-secondary" th:href="@{/plants/delete/{id}(id=*{id})}">削除</a>
-			<a class="btn btn-dark" th:href="@{/plants/edit/{id}(id=*{id})}">編集</a>
-			<a class="btn btn-dark my-3" th:href="@{/plants(page=${session.page})}">リストに戻る</a>
+			<a id="delete" class="btn btn-secondary" th:href="@{/botanicals/delete/{id}(id=*{id})}">削除</a>
+			<a class="btn btn-dark" th:href="@{/botanicals/edit/{id}(id=*{id})}">編集</a>
+			<a class="btn btn-dark my-3" th:href="@{/botanicals(page=${session.page})}">リストに戻る</a>
 		</div>
 	</div>
 	<!-- /.container -->

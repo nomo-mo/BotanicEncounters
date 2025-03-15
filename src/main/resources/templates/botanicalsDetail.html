@@ -7,12 +7,12 @@
 
 	<nav th:replace="~{commonP :: navbar}"></nav>
 
-	<div th:if="${plant != null}" th:object="${plant}" class="container mt-5">
+	<div th:if="${botanic != null}" th:object="${botanic}" class="container mt-5">
 		<div th:if="${status != null}" class="alert alert-success">
 			[[${status}]]
 		</div>
 
-		<h2>[[*{plantName}]]</h2>
+		<h2>[[*{botanicName}]]</h2>
 		<div class="row">
 			<div class="col-md-12">
 				<table class="table table-bordered table-hover detail-table">
@@ -44,11 +44,11 @@
 								<div style="display: flex; align-items: center; justify-content: center;">
 
 									<!-- 画像 -->
-									<img th:src="@{${plant.imagePath}}" alt="imagePlant" class="img-fluid"
+									<img th:src="@{${botanic.imagePath}}" alt="imageBotanic" class="img-fluid"
 										style="max-width: 500px; height: auto;">
 								</div>
 
-								<a th:href="@{/plantsList}" class="custom-button">PlantsList</a>
+								<a th:href="@{/botanicList}" class="custom-button">botanicalsList</a>
 							</td>
 						</tr>
 					</tbody>

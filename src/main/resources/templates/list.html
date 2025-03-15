@@ -7,8 +7,8 @@
       <div th:if="${status != null}" class="alert alert-success">
         [[${status}]]
       </div>    
-      <h2>観葉植物リスト</h2>
-      <a class="btn btn-dark my-4" th:href="@{/plants/add}">観葉植物の追加</a>
+      <h2>植物リスト</h2>
+      <a class="btn btn-dark my-4" th:href="@{/botanicals/add}">観葉植物の追加</a>
       <div class="center-container">
       <div class="row">
         <div class="col-md-12">
@@ -23,12 +23,12 @@
             </thead>
             <tbody>
               <tr class="align-middle"
-                  th:each="plant : ${plantList}"
-                  th:object="${plant}">
+                  th:each="botanic : ${botanicList}"
+                  th:object="${botanic}">
                 <td>[[*{id}]]</td>
                 <td>[[*{location.name}]]</td>
-                <td>[[*{plantName}]]</td>
-                <td><a class="btn btn-light" th:href="@{/plants/detail/{id}(id=*{id})}">＞</a></td>
+                <td>[[*{botanicName}]]</td>
+                <td><a class="btn btn-light" th:href="@{/botanic/detail/{id}(id=*{id})}">＞</a></td>
               </tr>
             </tbody>
           </table>

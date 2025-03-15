@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/css/style.css}" rel="stylesheet" />
-    <title>IndoorPlants</title>
+    <title>BotanicEncounters</title>
   </head>
   <body>
   	<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" th:href="@{/plants}">IndoorPlants</a>
+        <a class="navbar-brand" th:href="@{/botanicals}">BotanicEncounters</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto">
 			  <!-- Homeのドロップダウン -->
-            <li class="nav-plant dropdown">
+            <li class="nav-botanic dropdown">
               <a
                 class="nav-link dropdown-toggle"
                 href="#"
@@ -35,12 +35,12 @@
                 aria-expanded="false"
               >home</a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-plant" th:href="@{/home}" >homeへ</a></li>
+                <li><a class="dropdown-botanic" th:href="@{/home}" >homeへ</a></li>
               </ul>
             </li>
-            <!-- ログアウトボタン -->
+            <!-- ログアウトボタン 
                     <li class="nav-item">
-                        <a class="nav-link text-secondary fw-bold" th:href="@{/logout}">ログアウト</a>
+                        <a class="nav-link text-secondary fw-bold" th:href="@{/logout}">ログアウト</a>-->
           </ul>
         </div>
       </div>
