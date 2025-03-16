@@ -13,8 +13,13 @@
 	<nav th:replace="~{commonP :: navbar}"></nav>
 	<div class="container my-5">
 		<header class="d-flex justify-content-between align-items-center mb-4">
-			<h2>BotanicList</h2>
+			<h2>PlantsList</h2>
 		</header>
+
+		<form th:action="@{/plants/search}" method="get" class="search_container" style="margin-bottom: 20px;">
+			<input type="text" name="keyword" size="25" placeholder="キーワード検索" th:value="${searchKeyword}">
+			<input type="submit" value="検索" class="btn btn-dark">
+		</form>
 
 		<form th:action="@{/botanicals/category}" method="get">
 			<label for="category">カテゴリー選択：</label>
@@ -37,7 +42,7 @@
 		</form>
 
 		<div class="row">
-			
+
 			<!-- 植物リストの繰り返し表示 -->
 			<div class="col-md-2 mb-4" th:each="botanic : ${botanicals}">
 				<div class="wrapper">

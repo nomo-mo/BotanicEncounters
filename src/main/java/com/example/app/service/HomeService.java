@@ -12,5 +12,6 @@ public interface HomeService {
 	Home getBotanicById(Integer id);
 	List<Location> getBotanicLocations();
 	List<Botanic> getBotanicalsByCategory(String category);
+	List<Botanic> searchBotanicalsByKeyword(String keyword);
 
 }

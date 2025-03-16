@@ -44,4 +44,9 @@ public class HomeServiceImpl implements HomeService{
 		 return homeMapper.selectByCategory(category);
 	}
 
+	public List<Botanic> searchBotanicalsByKeyword(String keyword) {
+		return homeMapper.searchByKeyword("%" + keyword + "%");
+	}
+
+
 }

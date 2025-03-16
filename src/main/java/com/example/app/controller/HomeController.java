@@ -32,17 +32,24 @@ public class HomeController {
     	 model.addAttribute("botanicals", botanicals);            // モデルに追加
          return "botanicalsList";                  
     }
-    
+   
     @GetMapping("/detail/{id}")
 	public String showBotanicDetail(@PathVariable Integer id,Model model) {
 		model.addAttribute("botanic", homeService.getBotanicById(id));
-		return "plantsdetail";
+		return "botanicalsDetail";
 	}
     @GetMapping("/botanicals/category")
-    public String showPlantsByCategory(@RequestParam("category") String category, Model model) {
+    public String showBotanicalsByCategory(@RequestParam("category") String category, Model model) {
         List<Botanic> botanicals = homeService.getBotanicalsByCategory(category);
         model.addAttribute("botanicals", botanicals);
         model.addAttribute("selectedCategory", category); // 選択されたカテゴリーをHTMLに渡す
+        return "botanicalsList";
+    }
+    @GetMapping("/botanicals/search")
+    public String searchBotanicals(@RequestParam("keyword") String keyword, Model model) {
+        List<Botanic> botanicals = homeService.searchBotanicalsByKeyword(keyword);
+        model.addAttribute("botanicals", botanicals);
+        model.addAttribute("searchKeyword", keyword);
         return "botanicalsList";
     }
 }

@@ -203,6 +203,45 @@ h6 {
 }
 /* ボタン */
 
+/* ボタン2 */
+.custom-button2 {
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  border: solid 1px #333;
+  padding: 35px 40px;
+  position: relative;
+  font-size: 16px;
+  font-weight: bold;
+  background: transparent;
+  position: absolute;
+  top: 65%;
+  left: 80%;
+  z-index: 1000; /* 他の要素より前面に */
+}
+
+.custom-button2::before,
+.custom-button2::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -7px;
+  height: 1px;
+  background-color: #333;
+}
+
+.custom-button2::before {
+  width: 60px;
+  transform: translate(30px, 0px);
+}
+
+.custom-button2::after {
+  width: 15px;
+  transform-origin: right center;
+  transform: translate(30px, 0px) rotate(25deg);
+}
+/* ボタン2 */
+
 .shadow-image {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   border-radius: 5px; /* 角丸の調整（オプション） */
@@ -218,6 +257,4 @@ h6 {
 }
 
 	
-
-
 

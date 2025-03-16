@@ -20,5 +20,6 @@ public interface HomeMapper {
 	void insert(Botanic botanic);
 	void update(Botanic botanic);
 	void delete(int id);
+	List<Botanic> searchByKeyword(String string);
 
 }
