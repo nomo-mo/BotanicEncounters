@@ -2,57 +2,77 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.app.mapper.HomeMapper">
 
-    <resultMap id="homeMap" type="Home" autoMapping="true">
-        <association property="location">
-            <id property="id" column="location_id" />
-            <result property="name" column="location_name" />
-        </association>
-    </resultMap>
+	<resultMap id="homeMap" type="Home" autoMapping="true">
+		<association property="location">
+			<id property="id" column="location_id" />
+			<result property="name" column="location_name" />
+		</association>
+	</resultMap>
 
-    <select id="selectAll" resultMap="homeMap">
+	<select id="selectAll" resultMap="homeMap">
 		SELECT
-		 botanicals.id,  
-		 locations.id AS location_id, 
-		 locations.name AS location_name,
-		 botanicals.botanic_cpl, 
-		 botanicals.botanic_name,
-		 botanicals.japanese_name, 
-		 botanicals.scientific_name, 
-		 botanicals.genus_name,
-		 botanicals.description, 
-		 botanicals.image_path
+		botanicals.id,
+		locations.id AS location_id,
+		locations.name AS location_name,
+		botanicals.botanic_cpl,
+		botanicals.botanic_name,
+		botanicals.japanese_name,
+		botanicals.scientific_name,
+		botanicals.genus_name,
+		botanicals.description,
+		botanicals.image_path
 		FROM botanicals
 		JOIN locations
-		  ON botanicals.location_id = locations.id
+		ON botanicals.location_id = locations.id
 	</select>
 
- 
 
-    <select id="selectById" resultMap="homeMap" parameterType="int">
-       SELECT
-		 botanicals.id,  
-		 locations.id AS location_id, 
-		 locations.name AS location_name,
-		 botanicals.botanic_cpl, 
-		 botanicals.botanic_name,
-		 botanicals.japanese_name, 
-		 botanicals.scientific_name, 
-		 botanicals.genus_name,
-		 botanicals.description, 
-		 botanicals.image_path
+
+	<select id="selectById" resultMap="homeMap" parameterType="int">
+		SELECT
+		botanicals.id,
+		locations.id AS location_id,
+		locations.name AS
+		location_name,
+		botanicals.botanic_cpl,
+		botanicals.botanic_name,
+		botanicals.japanese_name,
+		botanicals.scientific_name,
+		botanicals.genus_name,
+		botanicals.description,
+		botanicals.image_path
 		FROM botanicals
 		JOIN locations
-		  ON botanicals.location_id = locations.id
+		ON botanicals.location_id = locations.id
 		WHERE botanicals.id = #{id}
-    </select>
-    
-    <select id="selectByCategory" resultMap="homeMap" parameterType="string">
-        SELECT botanicals.id, locations.id AS location_id, locations.name AS location_name,
-               botanicals.botanic_cpl, botanicals.botanic_name, botanicals.japanese_name, botanicals.scientific_name, 
-               botanicals.genus_name, botanicals.description, botanicals.image_path
-        FROM botanicals
-        JOIN locations ON botanicals.location_id = locations.id
-        WHERE locations.name = #{category}
-    </select>
+	</select>
+
+	<select id="selectByCategory" resultMap="homeMap"
+		parameterType="string">
+		SELECT botanicals.id, locations.id AS location_id,
+		locations.name AS
+		location_name,
+		botanicals.botanic_cpl,
+		botanicals.botanic_name, botanicals.japanese_name,
+		botanicals.scientific_name,
+		botanicals.genus_name,
+		botanicals.description, botanicals.image_path
+		FROM botanicals
+		JOIN
+		locations ON botanicals.location_id = locations.id
+		WHERE locations.name
+		= #{category}
+	</select>
+
+	<select id="searchByKeyword" parameterType="string"
+		resultMap="homeMap">
+		SELECT * FROM botanicals
+		WHERE
+		botanic_name LIKE CONCAT('%', #{keyword}, '%')
+		OR japanese_name LIKE CONCAT('%', #{keyword}, '%')
+		OR scientific_name LIKE CONCAT('%', #{keyword}, '%')
+		OR genus_name  LIKE CONCAT('%', #{keyword}, '%')
+		OR description LIKE CONCAT('%', #{keyword}, '%')
+	</select>
 
 </mapper>

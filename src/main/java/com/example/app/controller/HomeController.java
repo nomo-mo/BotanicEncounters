@@ -25,7 +25,7 @@ public class HomeController {
         return "index";                        // templates/index.html を返す
     }
     
-    @GetMapping("/botanicList")
+    @GetMapping("/botanicalsList")
     public String showBotanicalsList(Model model) {
     	 List<Botanic> botanicals = homeService.getAllBotanicals(); // 植物リストを取得
          System.out.println(botanicals);
@@ -33,13 +33,13 @@ public class HomeController {
          return "botanicalsList";                                  // botanicalsList.html にデータを渡して表示                
     }
    
-    @GetMapping("/botanic/detail/{id}")        // /botanic/detail/{id} で、指定 id の植物の詳細を表示
+    @GetMapping("/detail/{id}")        // /botanic/detail/{id} で、指定 id の植物の詳細を表示
 	public String showBotanicDetail(@PathVariable Integer id,Model model) {
 		model.addAttribute("botanic", homeService.getBotanicById(id));
 		return "botanicalsDetail";                                 // homeService.getBotanicById(id) で植物データを取得し、botanicalsDetail.html に渡す。
 	}
     
-    @GetMapping("/botanic/category")           // /botanic/category?category=〇〇 のようにクエリパラメータで category を指定
+    @GetMapping("/botanicals/category")           // /botanic/category?category=〇〇 のようにクエリパラメータで category を指定
     public String showBotanicalsByCategory(@RequestParam("category") String category, Model model) {
         List<Botanic> botanicals = homeService.getBotanicalsByCategory(category);     // カテゴリに該当する植物を取得
         model.addAttribute("botanicals", botanicals);
@@ -47,11 +47,17 @@ public class HomeController {
         return "botanicalsList";
     }
     
-    @GetMapping("/botanic/search")
+    @GetMapping("/botanicals/search")
     public String searchBotanicals(@RequestParam("keyword") String keyword, Model model) {
         List<Botanic> botanicals = homeService.searchBotanicalsByKeyword(keyword);
         model.addAttribute("botanicals", botanicals);
         model.addAttribute("searchKeyword", keyword);
         return "botanicalsList";
     }
+    
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login"; 
+    }
+        
 }

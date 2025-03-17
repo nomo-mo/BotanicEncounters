@@ -12,6 +12,30 @@
 			font-weight: bold;
 			font-size: 1.2em;
 			color: rgb(0, 64, 64);
+
+			.btn-dark {
+				background-color: #343a40;
+				color: white;
+				padding: 6px 12px;
+				font-size: 1rem;
+				border: none;
+				cursor: pointer;
+				border-radius: 4px;
+				margin-top: 10px;
+			}
+
+			.btn-dark:hover {
+				background-color: #23272b;
+			}
+
+			.search_container input[type="submit"],
+			.search_container input[type="text"] {
+				margin-top: 10px;
+				padding: 6px 12px;
+				font-size: 1rem;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+			}
 		}
 	</style>
 </head>
@@ -20,12 +44,14 @@
 	<nav th:replace="~{commonP :: navbar}"></nav>
 	<div class="container my-5">
 		<header class="d-flex justify-content-between align-items-center mb-4">
-			<h2>PlantsList</h2>
+			<h2>BotanicList</h2>
 		</header>
 
 		<form th:action="@{/botanicals/search}" method="get" class="search_container" style="margin-bottom: 20px;">
 			<input type="text" name="keyword" size="25" placeholder="キーワード検索" th:value="${searchKeyword}">
 			<input type="submit" value="検索" class="btn btn-dark">
+		
+		
 		</form>
 
 		<form th:action="@{/botanicals/category}" method="get">
@@ -40,16 +66,17 @@
 			<button type="submit" class="btn btn-dark">検索</button>
 			<p>選択中のカテゴリー: <span th:text="${selectedCategory ?: '未選択'}" class="selected-category"></span></p>
 		</form>
+	
 
 		<div class="row">
 			<!-- 植物リストの繰り返し表示 -->
 			<div class="col-md-2 mb-4" th:each="botanic : ${botanicals}">
 				<div class="wrapper">
 					<div class="card">
-						<img class="shadow-image" th:src="${botanic.imagePath != null ? botanic.imagePath : '/images/default.png'}" alt="Botanic Image">
+						<img class="shadow-image" th:src="@{${botanic.imagePath}}" alt="Botanic Image">
 					</div>
 				</div>
-				<a th:href="@{/botanicals/detail/{id}(id=${botanic.id})}" class="card-title" th:text="${botanic.botanicName}"></a>
+				<a th:href="@{/detail/{id}(id=${botanic.id})}" class="card-title" th:text="${botanic.botanicName}"></a>
 			</div>
 		</div>
 	</div>
@@ -59,6 +86,7 @@
 	</footer>
 
 	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 
