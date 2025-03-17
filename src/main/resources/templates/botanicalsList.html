@@ -9,14 +9,14 @@
 	<title>Botanic一覧</title>
 </head>
 
-<body style="background-color: rgb(202, 206, 205);">
+<body style="background-color:  rgb(238, 240, 240);">
 	<nav th:replace="~{commonP :: navbar}"></nav>
 	<div class="container my-5">
 		<header class="d-flex justify-content-between align-items-center mb-4">
 			<h2>PlantsList</h2>
 		</header>
 
-		<form th:action="@{/plants/search}" method="get" class="search_container" style="margin-bottom: 20px;">
+		<form th:action="@{/botanicals/search}" method="get" class="search_container" style="margin-bottom: 20px;">
 			<input type="text" name="keyword" size="25" placeholder="キーワード検索" th:value="${searchKeyword}">
 			<input type="submit" value="検索" class="btn btn-dark">
 		</form>

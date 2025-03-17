@@ -25,7 +25,7 @@ public class HomeController {
         return "index";                        // templates/index.html を返す
     }
     
-    @GetMapping("/botanicalsList")
+    @GetMapping("/botanicList")
     public String showBotanicalsList(Model model) {
     	 List<Botanic> botanicals = homeService.getAllBotanicals(); // 植物リストを取得
          System.out.println(botanicals);
@@ -33,19 +33,19 @@ public class HomeController {
          return "botanicalsList";                  
     }
    
-    @GetMapping("/detail/{id}")
+    @GetMapping("/botanic/detail/{id}")
 	public String showBotanicDetail(@PathVariable Integer id,Model model) {
 		model.addAttribute("botanic", homeService.getBotanicById(id));
 		return "botanicalsDetail";
 	}
-    @GetMapping("/botanicals/category")
+    @GetMapping("/botanic/category")
     public String showBotanicalsByCategory(@RequestParam("category") String category, Model model) {
         List<Botanic> botanicals = homeService.getBotanicalsByCategory(category);
         model.addAttribute("botanicals", botanicals);
         model.addAttribute("selectedCategory", category); // 選択されたカテゴリーをHTMLに渡す
         return "botanicalsList";
     }
-    @GetMapping("/botanicals/search")
+    @GetMapping("/botanic/search")
     public String searchBotanicals(@RequestParam("keyword") String keyword, Model model) {
         List<Botanic> botanicals = homeService.searchBotanicalsByKeyword(keyword);
         model.addAttribute("botanicals", botanicals);

@@ -29,7 +29,7 @@ public class BotanicController {
 		private final HttpSession session;
 		
 		@GetMapping
-		public String showBotanicalsList(
+		public String showBotanicList(
 				@RequestParam(name = "page", defaultValue = "1") Integer page,
 				Model model) {
 			 Admin authAdmin = (Admin) session.getAttribute("authAdmin");

@@ -6,13 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.app.domain.Botanic;
-import com.example.app.domain.Home;
 
 @Mapper
 public interface HomeMapper {
 	
 	List<Botanic> selectAll();
-	Home selectById(int id);
+	Botanic selectById(int id);
 	List<Botanic> selectByCategory(@Param("category") String category);
 	// ページ分割機能用
     List<Botanic> selectLimited(@Param("offset") int offset, @Param("limit") int limit);
