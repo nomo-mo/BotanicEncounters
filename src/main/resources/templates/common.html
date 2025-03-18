@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/css/style.css}" rel="stylesheet" />
-    <title>IndoorPlants</title>
+    <title>>BotanicEncounters</title>
   </head>
   <body>
   	<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -62,7 +62,7 @@
     <!-- ページネーション -->
 <div th:fragment="pagination(page, totalPages)" th:if="${totalPages >= 2}" class="pagination-container">
     <div class="pagination-next">
-        <a th:href="@{${page + 1 <= totalPages ? ('/plants?page=' + (page + 1)) : '#'}}"
+        <a th:href="@{${page + 1 <= totalPages ? ('/botanicals?page=' + (page + 1)) : '#'}}"
            th:classappend="${page + 1 > totalPages} ? 'disabled'"
            class="pagination-next-link key-btn">
             次のページ
@@ -71,7 +71,7 @@
 
     <ul class="pagination">
         <!-- 前のページへ -->
-        <li th:classappend="${page == 1} ? 'disabled'" class="page-plant">
+        <li th:classappend="${page == 1} ? 'disabled'" class="page-botanic">
             <a class="page-link" th:href="@{${page > 1 ? ('/botanicals?page=' + (page - 1)) : '#'}}">&laquo;</a>
         </li>
 
