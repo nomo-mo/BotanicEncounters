@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.app.domain.Botanic;
+import com.example.app.domain.Home;
 import com.example.app.domain.Location;
 import com.example.app.mapper.HomeMapper;
 import com.example.app.mapper.LocationMapper;
@@ -26,7 +27,7 @@ public class HomeServiceImpl implements HomeService{
 	}
 
 	@Override
-	public Botanic getBotanicById(Integer id) {
+	public Home getBotanicById(Integer id) {
 		if(id == null) {
 			return null;
 		}

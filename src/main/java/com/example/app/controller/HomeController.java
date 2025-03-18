@@ -33,17 +33,11 @@ public class HomeController {
          return "botanicalsList";                                  // botanicalsList.html にデータを渡して表示                
     }
    
-    @GetMapping("/botanic/detail/{id}")
-    public String showBotanicDetail(@PathVariable Integer id, Model model) {
-        Botanic botanic = homeService.getBotanicById(id);
-        if (botanic == null) {
-            return "redirect:/botanicals?error=notfound"; // 404ではなくリストにリダイレクト
-        }
-        model.addAttribute("botanic", botanic);
-        return "detail";
+    @GetMapping("/detail/{id}")
+    public String showBotanicDetail(@PathVariable Integer id,Model model) {
+      model.addAttribute("botanic", homeService.getBotanicById(id));
+        return "botanicalsDetail";
     }
-
-    
     @GetMapping("/botanicals/category")           // /botanic/category?category=〇〇 のようにクエリパラメータで category を指定
     public String showBotanicalsByCategory(@RequestParam("category") String category, Model model) {
         List<Botanic> botanicals = homeService.getBotanicalsByCategory(category);     // カテゴリに該当する植物を取得
@@ -59,10 +53,6 @@ public class HomeController {
         model.addAttribute("searchKeyword", keyword);
         return "botanicalsList";
     }
+   
     
-    @GetMapping("/login")
-    public String showLoginPage() {
-        return "login"; 
-    }
-        
 }
