@@ -22,7 +22,7 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home() {
-        return "index";                        // templates/index.html を返す
+        return "index";                        // templates/index.html を返
     }
     
     @GetMapping("/botanicalsList")
@@ -33,11 +33,16 @@ public class HomeController {
          return "botanicalsList";                                  // botanicalsList.html にデータを渡して表示                
     }
    
-    @GetMapping("/detail/{id}")        // /botanic/detail/{id} で、指定 id の植物の詳細を表示
-	public String showBotanicDetail(@PathVariable Integer id,Model model) {
-		model.addAttribute("botanic", homeService.getBotanicById(id));
-		return "botanicalsDetail";                                 // homeService.getBotanicById(id) で植物データを取得し、botanicalsDetail.html に渡す。
-	}
+    @GetMapping("/botanic/detail/{id}")
+    public String showBotanicDetail(@PathVariable Integer id, Model model) {
+        Botanic botanic = homeService.getBotanicById(id);
+        if (botanic == null) {
+            return "redirect:/botanicals?error=notfound"; // 404ではなくリストにリダイレクト
+        }
+        model.addAttribute("botanic", botanic);
+        return "detail";
+    }
+
     
     @GetMapping("/botanicals/category")           // /botanic/category?category=〇〇 のようにクエリパラメータで category を指定
     public String showBotanicalsByCategory(@RequestParam("category") String category, Model model) {
