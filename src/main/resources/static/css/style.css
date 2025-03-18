@@ -27,13 +27,18 @@ h1 {
 
 h2{
 	margin-bottom: 2rem;
+	color: rgb(97, 98, 89);
 }
 
 
 h6 {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
     padding-top: 50px;
+}
+
+.p{
+	color: rgb(97, 98, 89);
 }
 
 .row{
@@ -64,7 +69,7 @@ h6 {
 }
 
 .detail-table .note {
-  font-family: "メイリオ", sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 1rem;
   margin-bottom: 0;
 }
@@ -168,7 +173,7 @@ h6 {
 .custom-button {
   display: inline-block;
   text-decoration: none;
-  color: #333;
+  color: rgb(97, 98, 89);
   border: solid 1px #333;
   padding: 35px 40px;
   position: relative;
@@ -207,7 +212,7 @@ h6 {
 .custom-button2 {
   display: inline-block;
   text-decoration: none;
-  color: #333;
+  color: rgb(97, 98, 89);
   border: solid 1px #333;
   padding: 35px 40px;
   position: relative;
@@ -243,7 +248,7 @@ h6 {
 /* ボタン2 */
 
 .shadow-image {
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
   border-radius: 5px; /* 角丸の調整（オプション） */
 }
 

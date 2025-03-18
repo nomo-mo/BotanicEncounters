@@ -54,5 +54,9 @@ public class HomeController {
         return "botanicalsList";
     }
    
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login"; 
+    }
     
 }
