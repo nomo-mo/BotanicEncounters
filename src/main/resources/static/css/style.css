@@ -173,8 +173,8 @@ h6 {
 .custom-button {
   display: inline-block;
   text-decoration: none;
-  color: rgb(97, 98, 89);
-  border: solid 1px #333;
+  color: rgb(172, 148, 91);
+  border: solid 1px rgb(116, 116, 116);
   padding: 35px 40px;
   position: relative;
   font-size: 16px;
@@ -193,7 +193,7 @@ h6 {
   top: 50%;
   right: -7px;
   height: 1px;
-  background-color: #333;
+  background-color: rgb(172, 148, 91);
 }
 
 .custom-button::before {
@@ -213,7 +213,7 @@ h6 {
   display: inline-block;
   text-decoration: none;
   color: rgb(97, 98, 89);
-  border: solid 1px #333;
+  border: solid 1px rgb(172, 148, 91);
   padding: 35px 40px;
   position: relative;
   font-size: 16px;
@@ -232,7 +232,7 @@ h6 {
   top: 50%;
   right: -7px;
   height: 1px;
-  background-color: #333;
+  background-color: rgb(116, 116, 116);
 }
 
 .custom-button2::before {

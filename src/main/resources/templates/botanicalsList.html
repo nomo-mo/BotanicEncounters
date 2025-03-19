@@ -12,38 +12,44 @@
 		.selected-category {
 			font-weight: bold;
 			font-size: 1.2em;
-			color: rgb(0, 64, 64);
+			color: rgb(129, 109, 65);
+		}
 
-			.btn-dark {
-				background-color: #343a40;
-				color: white;
-				padding: 6px 12px;
-				font-size: 1rem;
-				border: none;
-				cursor: pointer;
-				border-radius: 4px;
-				margin-top: 10px;
-			}
+		.btn-dark {
+			background-color: #343a40;
+			color: white;
+			padding: 6px 12px;
+			font-size: 1rem;
+			border: none;
+			cursor: pointer;
+			border-radius: 4px;
+			margin-top: 10px;
+		}
 
-			.btn-dark:hover {
-				background-color: #23272b;
-			}
+		.btn-dark:hover {
+			background-color: #23272b;
+		}
 
-			.search_container input[type="submit"],
-			.search_container input[type="text"] {
-				margin-top: 10px;
-				padding: 6px 12px;
-				font-size: 1rem;
-				border: 1px solid #ccc;
-				border-radius: 4px;
-			}
+		.search_container input[type="submit"],
+		.search_container input[type="text"] {
+			margin-top: 10px;
+			padding: 6px 12px;
+			font-size: 1rem;
+			border: 1px solid rgb(172, 148, 91);
+			border-radius: 4px;
+		}
+
+		.d-flex {
+			margin-bottom: 20px;
 		}
 	</style>
 </head>
 
-<body style="background-color: rgb(208, 210, 208);">
+<body style="background-color: rgb(208, 210, 208); font-family: 'Cormorant Garamond', serif;">
+
 	<nav th:replace="~{commonP :: navbar}"></nav>
 	<div class="container my-5">
+
 		<header class="d-flex justify-content-between align-items-center mb-4">
 			<h2>BotanicList</h2>
 		</header>
@@ -53,11 +59,10 @@
 			<input type="text" name="keyword" size="25" placeholder="キーワード検索" th:value="${searchKeyword}"
 				class="form-control me-2" style="max-width: 300px;">
 			<input type="submit" value="検索" class="btn btn-outline-secondary">
-			<div th:if="${#lists.isEmpty(botanicals)}" style="color: red; margin-top: 10px;">
+			<div th:if="${#lists.isEmpty(botanicals)}" style="color: rgb(226, 48, 22); margin-top: 10px;">
 				&nbsp;&nbsp;&nbsp;お探しの植物は見当たりません。
 			</div>
 		</form>
-
 
 		<form th:action="@{/botanicals/category}" method="get" class="d-flex align-items-center" style="gap: 10px;">
 			<!--  <label for="category">カテゴリー：</label>  -->
@@ -74,9 +79,10 @@
 		</form>
 
 
+
 		<div class="row">
 			<!-- 植物リストの繰り返し表示 -->
-			<div class="col-md-3 mb-4" th:each="botanic : ${botanicals}">
+			<div class="col-md-2 mb-3" th:each="botanic : ${botanicals}">
 				<div class="wrapper">
 					<div class="card" style="border: 6px solid white;"> <!-- 白い枠を追加 -->
 						<img class="shadow-image" th:src="@{${botanic.imagePath}}" alt="Botanic Image"
@@ -84,13 +90,14 @@
 						<div class="card-body p-2 text-center"> <!-- 文字を中央に配置 -->
 							<a th:href="@{/detail/{id}(id=${botanic.id})}" class="card-title d-block text-center"
 								th:text="${botanic.botanicName}" style="text-align: center;"></a> <!-- 文字を中央に -->
-							
+
 							<!-- "お気に入り" ボタンを th:each の内側に配置 -->
 							<div class="d-flex justify-content-end">
-							<form th:action="@{/botanicals/favorite/{id}(id=${botanic.id})}" method="post">
-								<button type="submit" class="btn btn-light">☆</button>
-							</form>
-</div>
+								<form th:action="@{/botanicals/favorite/{id}(id=${botanic.id})}" method="post">
+									<button type="submit" class="btn btn-light">☆</button>
+								</form>
+
+							</div>
 						</div>
 					</div>
 				</div>
