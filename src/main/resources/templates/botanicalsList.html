@@ -52,7 +52,7 @@
 			style="margin-bottom: 20px;">
 			<input type="text" name="keyword" size="25" placeholder="キーワード検索" th:value="${searchKeyword}"
 				class="form-control me-2" style="max-width: 300px;">
-			<input type="submit" value="検索" class="btn btn-light">
+			<input type="submit" value="検索" class="btn btn-outline-secondary">
 			<div th:if="${#lists.isEmpty(botanicals)}" style="color: red; margin-top: 10px;">
 				&nbsp;&nbsp;&nbsp;お探しの植物は見当たりません。
 			</div>
@@ -60,15 +60,16 @@
 
 
 		<form th:action="@{/botanicals/category}" method="get" class="d-flex align-items-center" style="gap: 10px;">
-			<label for="category">カテゴリー：</label>
+			<!--  <label for="category">カテゴリー：</label>  -->
 			<select name="category" id="category">
 				<option value="観葉植物">観葉植物</option>
 				<option value="花">花</option>
 				<option value="植栽">植栽</option>
 				<option value="フェイク">フェイク</option>
 				<option value="azumamakoto">azumamakoto</option>
+				<option value="草花">草花</option>
 			</select>
-			<button type="submit" class="btn btn-light">検索</button>
+			<button type="submit" class="btn btn-outline-secondary">検索</button>
 			<p>選択中のカテゴリー: <span th:text="${selectedCategory}" class="selected-category"></span></p>
 		</form>
 
@@ -83,6 +84,13 @@
 						<div class="card-body p-2 text-center"> <!-- 文字を中央に配置 -->
 							<a th:href="@{/detail/{id}(id=${botanic.id})}" class="card-title d-block text-center"
 								th:text="${botanic.botanicName}" style="text-align: center;"></a> <!-- 文字を中央に -->
+							
+							<!-- "お気に入り" ボタンを th:each の内側に配置 -->
+							<div class="d-flex justify-content-end">
+							<form th:action="@{/botanicals/favorite/{id}(id=${botanic.id})}" method="post">
+								<button type="submit" class="btn btn-light">☆</button>
+							</form>
+</div>
 						</div>
 					</div>
 				</div>
