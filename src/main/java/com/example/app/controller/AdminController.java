@@ -27,23 +27,24 @@ public class AdminController {
 		return "login";                                     // src/main/resources/templates/login.html を表示
 	}
 	
-	@PostMapping("/")                                                                        // フォーム送信（POST）を処理
-	public String loginCheck(@Valid Admin admin,Errors errors,RedirectAttributes ra) {  // フォームの入力値を Admin オブジェクトにバインドし、バリデーションを実行
-		if(errors.hasErrors()) {  
-			return "login";                                                             // バリデーションエラーがあれば、再び login.html を表示し、エラー内容を反映
-		}
-		
-		Admin authAdmin = service.getAuthenticatedAdmin(admin.getLoginId(), admin.getLoginPass());
-		if(authAdmin == null) {                                  // service.getAuthenticatedAdmin(loginId, loginPass) を呼び出し、
-			errors.rejectValue("loginId", "wrong_id_or_pass");   // データベース内の管理者情報と一致するか確認
-			return "login";                                      // エラーメッセージを設定し、login.html に戻る
-		}
-		
-		session.setAttribute("authAdmin", authAdmin);		     // HttpSession に認証済み管理者情報を保存し、ログイン状態を維持		
-		ra.addFlashAttribute("status", "ログインしました");
-		System.out.println("ログイン成功！/botanicals へリダイレクト"); // デバッグログ
-		return "redirect:/botanicals";                               // /plants へリダイレクト（ログイン後のページ）
+	@PostMapping("/login")
+	public String loginCheck(@Valid Admin admin, Errors errors, RedirectAttributes ra) {
+	    if (errors.hasErrors()) {  
+	        return "login"; 
+	    }
+
+	    Admin authAdmin = service.getAuthenticatedAdmin(admin.getLoginId(), admin.getLoginPass());
+	    if (authAdmin == null) {
+	        errors.rejectValue("loginId", "wrong_id_or_pass", "ログインIDまたはパスワードが間違っています");
+	        return "login";
+	    }
+
+	    session.setAttribute("authAdmin", authAdmin);  
+	    ra.addFlashAttribute("status", "ログインしました");
+	    System.out.println("ログイン成功！/botanicals へリダイレクト");
+	    return "redirect:/botanicals"; 
 	}
+
 	
 	@GetMapping("/admin/logout")
 	public String logout(RedirectAttributes ra) {
