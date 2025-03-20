@@ -59,9 +59,6 @@
 			<input type="text" name="keyword" size="25" placeholder="キーワード検索" th:value="${searchKeyword}"
 				class="form-control me-2" style="max-width: 300px;">
 			<input type="submit" value="検索" class="btn btn-outline-secondary">
-			<div th:if="${#lists.isEmpty(botanicals)}" style="color: rgb(226, 48, 22); margin-top: 10px;">
-				&nbsp;&nbsp;&nbsp;お探しの植物は見当たりません。
-			</div>
 		</form>
 
 		<form th:action="@{/botanicals/category}" method="get" class="d-flex align-items-center" style="gap: 10px;">
@@ -94,7 +91,7 @@
 							<!-- "お気に入り" ボタンを th:each の内側に配置 -->
 							<div class="d-flex justify-content-end">
 								<form th:action="@{/botanicals/favorite/{id}(id=${botanic.id})}" method="post">
-									<button type="submit" class="btn btn-light">☆</button>
+									<button type="submit" class="btn btn-light">♡</button>
 								</form>
 
 							</div>
@@ -104,7 +101,9 @@
 			</div>
 		</div>
 
-
+		<div th:if="${#lists.isEmpty(botanicals)}" style="color: rgb(226, 48, 22); margin-top: 10px;">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;お探しの植物は見当たりません。
+		</div>
 
 		<footer class="text-center py-3">
 			<p>&copy; 2025 BotanicEncounters</p>
