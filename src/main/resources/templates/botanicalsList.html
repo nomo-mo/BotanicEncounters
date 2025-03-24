@@ -65,17 +65,15 @@
 			<!--  <label for="category">カテゴリー：</label>  -->
 			<select name="category" id="category">
 				<option value="観葉植物">観葉植物</option>
-				<option value="花">花</option>
+				<option value="生花">生花</option>
 				<option value="植栽">植栽</option>
-				<option value="フェイク">フェイク</option>
-				<option value="azumamakoto">azumamakoto</option>
+				<option value="オージープランツ">オージープランツ</option>
 				<option value="草花">草花</option>
+				<option value="その他">その他</option>
 			</select>
 			<button type="submit" class="btn btn-outline-secondary">検索</button>
 			<p>選択中のカテゴリー: <span th:text="${selectedCategory}" class="selected-category"></span></p>
 		</form>
-
-
 
 		<div class="row">
 			<!-- 植物リストの繰り返し表示 -->
@@ -90,10 +88,15 @@
 
 							<!-- "お気に入り" ボタンを th:each の内側に配置 -->
 							<div class="d-flex justify-content-end">
-								<form th:action="@{/botanicals/favorite/{id}(id=${botanic.id})}" method="post">
+								<form th:action="@{/botanicals/favorite/{id}(id=${botanic.id})}" method="post"
+									th:if="${not #lists.contains(favorites, botanic.id)}">
 									<button type="submit" class="btn btn-light">♡</button>
 								</form>
 
+								<form th:action="@{/botanicals/unfavorite/{id}(id=${botanic.id})}" method="post"
+									th:if="${#lists.contains(favorites, botanic.id)}">
+									<button type="submit" class="btn btn-danger">♥</button>
+								</form>
 							</div>
 						</div>
 					</div>
