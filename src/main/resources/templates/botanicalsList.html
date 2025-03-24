@@ -88,15 +88,11 @@
 
 							<!-- "お気に入り" ボタンを th:each の内側に配置 -->
 							<div class="d-flex justify-content-end">
-								<form th:action="@{/botanicals/favorite/{id}(id=${botanic.id})}" method="post"
-									th:if="${not #lists.contains(favorites, botanic.id)}">
+								<form th:action="@{/botanicals/favorite/{id}(id=${botanic.id})}" method="post">
 									<button type="submit" class="btn btn-light">♡</button>
 								</form>
 
-								<form th:action="@{/botanicals/unfavorite/{id}(id=${botanic.id})}" method="post"
-									th:if="${#lists.contains(favorites, botanic.id)}">
-									<button type="submit" class="btn btn-danger">♥</button>
-								</form>
+							
 							</div>
 						</div>
 					</div>
