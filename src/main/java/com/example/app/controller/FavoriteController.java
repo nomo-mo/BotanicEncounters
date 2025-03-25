@@ -19,28 +19,32 @@ public class FavoriteController {
 
     private final FavoriteService favoriteService;
 
-    @GetMapping("/{id}")
-    public String showFavorite(@PathVariable Integer id, Model model) {
-        model.addAttribute("botanicalId", id);
-        return "favorite_detail"; // `favorite_detail.html` に遷移
+    @GetMapping("/{botanicName}")
+    public String showFavorite(@PathVariable String botanicName, Model model) {
+        model.addAttribute("botanicName", botanicName);
+        return "favorite_save"; // `favorite_save.html` に遷移
     }
 
-    @PostMapping("/{id}/favorite")
-    public String addFavorite(@PathVariable Integer id, RedirectAttributes ra) {
+    @PostMapping("/{botanicName}/favorite")
+    public String addFavorite(@PathVariable String botanicName, RedirectAttributes ra) {
+        // 仮の画像パス（実際はデータベースから取得するなどの処理が必要）
+        String imagePath = "/static/images/default.jpg";
+
         // ログインしていないユーザーでもお気に入りを登録できるようにする
-        favoriteService.addFavorite(null, id);  // `null`を渡すか、ユーザーIDなしで処理
+        favoriteService.addFavorite(null, botanicName, imagePath);
         ra.addFlashAttribute("status", "お気に入りに登録しました");
-        return "redirect:/favorite_detail/" + id;
+        return "redirect:/botanicals/favorite/" + botanicName;
     }
 
     // **お気に入り削除**
-    @PostMapping("/{id}/unfavorite")
-    public String removeFavorite(@PathVariable Integer id, RedirectAttributes ra) {
+    @PostMapping("/{botanicName}/unfavorite")
+    public String removeFavorite(@PathVariable String botanicName, RedirectAttributes ra) {
         // ログインしていないユーザーでもお気に入り解除できるようにする
-        favoriteService.removeFavorite(null, id);  // 同様に`null`を渡す
+        favoriteService.removeFavorite(null, botanicName);
         ra.addFlashAttribute("status", "お気に入りを解除しました");
-        return "redirect:/favorite_detail/" + id;
+        return "redirect:/botanicals/favorite/" + botanicName;
     }
 }
+
 
 

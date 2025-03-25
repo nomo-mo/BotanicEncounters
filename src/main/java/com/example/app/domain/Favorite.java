@@ -9,7 +9,8 @@ public class Favorite {
 	
 	private Integer id;
 	private Integer userId;
-	private Integer botanicId;
+	private String botanicName;
+	private String imagePath; 
 	private LocalDateTime createdAt;
 
 }

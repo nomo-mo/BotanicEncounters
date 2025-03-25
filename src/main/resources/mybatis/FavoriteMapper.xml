@@ -3,34 +3,36 @@
 <mapper namespace="com.example.app.mapper.FavoriteMapper">
 
     <resultMap id="favoriteMap" type="com.example.app.domain.Favorite" autoMapping="true">
-        <association property="botanic" javaType="com.example.app.domain.Botanic">
-            <id property="id" column="botanic_id" />
-            <result property="botanicName" column="botanic_name" />
-            <result property="imagePath" column="image_path" />
-        </association>
+        <result property="botanicName" column="botanic_name" />
+        <result property="imagePath" column="image_path" />
     </resultMap>
 
+    <!-- お気に入り登録 -->
     <insert id="insertFavorite" parameterType="com.example.app.domain.Favorite">
-        INSERT INTO favorite (user_id, botanic_id)
-        VALUES (#{userId}, #{botanicId})
+        INSERT INTO favorites (user_id, botanic_name, image_path)
+        VALUES (#{userId}, #{botanicName}, #{imagePath})
     </insert>
 
+    <!-- お気に入り削除 -->
     <delete id="deleteFavorite">
-        DELETE FROM favorite WHERE user_id = #{userId} AND botanic_id = #{botanicId}
+        DELETE FROM favorites WHERE user_id = #{userId} AND botanic_name = #{botanicName}
     </delete>
 
+    <!-- ユーザーのお気に入り一覧を取得 -->
     <select id="selectFavoritesByUserId" resultMap="favoriteMap">
-        SELECT f.botanic_id, b.botanic_name, b.image_path 
-        FROM favorite f
-        JOIN botanicals b ON f.botanic_id = b.id
-        WHERE f.user_id = #{userId}
+        SELECT botanic_name, image_path 
+        FROM favorites
+        WHERE user_id = #{userId}
     </select>
 
+    <!-- すでにお気に入りかどうかをチェック -->
     <select id="isFavorite" resultType="boolean">
         SELECT EXISTS (
-            SELECT 1 FROM favorite WHERE user_id = #{userId} AND botanic_id = #{botanicId}
+            SELECT 1 FROM favorites WHERE user_id = #{userId} AND botanic_name = #{botanicName}
         )
     </select>
 
 </mapper>
+
+
 

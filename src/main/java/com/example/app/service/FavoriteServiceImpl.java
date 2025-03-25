@@ -11,33 +11,31 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class FavoriteServiceImpl implements FavoriteService{
-	
-	private final FavoriteMapper favoriteMapper;
+public class FavoriteServiceImpl implements FavoriteService {
+    
+    private final FavoriteMapper favoriteMapper;
 
-	@Override
-	public void addFavorite(Integer userId, Integer botanicId) {
+    @Override
+    public void addFavorite(Integer userId, String botanicName, String imagePath) {
         Favorite favorite = new Favorite();
         favorite.setUserId(userId);
-        favorite.setBotanicId(botanicId);
+        favorite.setBotanicName(botanicName);
+        favorite.setImagePath(imagePath);
         favoriteMapper.insertFavorite(favorite);
-		
-	}
+    }
 
-	@Override
-	public void removeFavorite(Integer userId, Integer botanicId) {
-		favoriteMapper.deleteFavorite(userId,botanicId);
-		
-	}
+    @Override
+    public void removeFavorite(Integer userId, String botanicName) {
+        favoriteMapper.deleteFavorite(userId, botanicName);
+    }
 
-	@Override
-	public boolean isFavorite(Integer userId, Integer botanicId) {
-		return favoriteMapper.isFavorite(userId, botanicId);
-	}
+    @Override
+    public boolean isFavorite(Integer userId, String botanicName) {
+        return favoriteMapper.isFavorite(userId, botanicName);
+    }
 
-	@Override
-	public List<Favorite> getUserFavorites(Integer userId) {
-		return favoriteMapper.getFavoritesByUserId(userId);
-	}
-
+    @Override
+    public List<Favorite> getUserFavorites(Integer userId) {
+        return favoriteMapper.getFavoritesByUserId(userId);
+    }
 }
