@@ -70,11 +70,17 @@ public class BotanicServiceImpl implements BotanicService {
 
 }
 
+	
 
 	@Override
 	public void addBotanicImage(Integer botanicId, MultipartFile file) {
 		// TODO 自動生成されたメソッド・スタブ
 		
+	}
+
+	@Override
+	public Botanic findByName(String botanicName) {
+		return botanicMapper.findByName(botanicName);
 	}
 
 

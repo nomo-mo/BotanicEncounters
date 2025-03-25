@@ -20,5 +20,6 @@ public interface BotanicMapper {
 	void insert(Botanic botanic);
 	void update(Botanic botanic);
 	void delete(int id);
+	Botanic findByName(String botanicName);
 	
 }

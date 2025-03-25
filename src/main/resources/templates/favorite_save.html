@@ -14,22 +14,24 @@
 	<nav th:replace="~{commonP :: navbar}"></nav>
 	<div class="container my-5">
 
-		<header class="d-flex justify-content-between align-items-center mb-4">
-			<h2>お気に入り登録</h2>
-		</header>
-    
-    <p th:if="${status}" th:text="${status}" class="status-message"></p>
-    
-    <div>
-        <p>植物ID: <span th:text="${botanicalId}"></span></p>
-        <form th:action="@{'/favorite/' + ${botanicalId} + '/favorite'}" method="post">
-            <button type="submit">お気に入り登録</button>
-        </form>
-        <form th:action="@{'/favorite/' + ${botanicalId} + '/unfavorite'}" method="post">
-            <button type="submit">お気に入り解除</button>
-        </form>
-    </div>
-   
+		<p th:if="${status}" th:text="${status}" class="status-message"></p>
+
+		<!-- botanicNameとimagePathが存在する場合のみ表示 -->
+		<div th:if="${botanicName}">
+			<h3>お気に入り</h3>
+			<p>植物名: <span th:text="${botanicName}"></span></p>
+
+			<!-- 画像パスが存在する場合に画像を表示 -->
+			<img th:src="@{${imagePath}}" alt="植物画像" style="width: 150px;" th:if="${imagePath}"/>
+
+			<form th:action="@{'/botanicals/favorite/' + ${botanicalId} + '/favorite'}" method="post">
+				<button type="submit">お気に入り一覧</button>
+			</form>
+			<form th:action="@{'/botanicals/favorite/' + ${botanicalId} + '/unfavorite'}" method="post">
+				<button type="submit">お気に入り解除</button>
+			</form>
+		</div>
+
 		<footer class="text-center py-3">
 			<p>&copy; 2025 BotanicEncounters</p>
 		</footer>

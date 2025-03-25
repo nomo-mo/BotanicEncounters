@@ -74,5 +74,10 @@
 	<delete id="delete" parameterType="int">
 		DELETE FROM botanicals WHERE id = #{id}
 	</delete>
+	
+	<select id="findByName" resultType="com.example.app.domain.Botanic">
+    SELECT * FROM botanicals WHERE botanic_name = #{botanicName}
+</select>
+	
 
 </mapper>

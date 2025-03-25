@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.app.domain.Botanic;
+import com.example.app.service.BotanicService;
 import com.example.app.service.FavoriteService;
 
 import lombok.RequiredArgsConstructor;
@@ -19,27 +20,35 @@ import lombok.RequiredArgsConstructor;
 public class FavoriteController {
 
     private final FavoriteService favoriteService;
-    
- // お気に入り一覧を表示
+    private final BotanicService botanicService; // 追加：植物情報を取得するためのサービス
+
+    // お気に入り一覧を表示
     @GetMapping("/list")
-    public String showFavoriteList(@RequestParam Integer userId, Model model) {
-        // ユーザーIDを渡して、お気に入りリストを取得
-        model.addAttribute("favorites", favoriteService.getUserFavorites(userId));
-        return "favorite_list"; // `favorite_list.html` に遷移
+    public String showFavoriteList(Model model) {
+        model.addAttribute("favorites", favoriteService.getUserFavorites(null));
+        return "favorite_list";
     }
 
+    // **お気に入り詳細を表示**
     @GetMapping("/{botanicName}")
     public String showFavorite(@PathVariable String botanicName, Model model) {
-        model.addAttribute("botanicName", botanicName);
-        return "favorite_save"; // `favorite_save.html` に遷移
+        Botanic botanic = botanicService.findByName(botanicName);
+        if (botanic != null) {
+            model.addAttribute("botanicName", botanic.getBotanicName());
+            model.addAttribute("imagePath", botanic.getImagePath());
+        } else {
+            model.addAttribute("botanicName", botanicName);
+            model.addAttribute("imagePath", "/static/images/default.jpg"); // 画像がない場合のデフォルト
+        }
+        return "favorite_save";
     }
 
+    // **お気に入り登録**
     @PostMapping("/{botanicName}/favorite")
     public String addFavorite(@PathVariable String botanicName, RedirectAttributes ra) {
-        // 仮の画像パス（実際はデータベースから取得するなどの処理が必要）
-        String imagePath = "/static/images/default.jpg";
+        Botanic botanic = botanicService.findByName(botanicName);
+        String imagePath = (botanic != null) ? botanic.getImagePath() : "/static/images/default.jpg";
 
-        // ログインしていないユーザーでもお気に入りを登録できるようにする
         favoriteService.addFavorite(null, botanicName, imagePath);
         ra.addFlashAttribute("status", "お気に入りに登録しました");
         return "redirect:/botanicals/favorite/" + botanicName;
@@ -48,7 +57,6 @@ public class FavoriteController {
     // **お気に入り削除**
     @PostMapping("/{botanicName}/unfavorite")
     public String removeFavorite(@PathVariable String botanicName, RedirectAttributes ra) {
-        // ログインしていないユーザーでもお気に入り解除できるようにする
         favoriteService.removeFavorite(null, botanicName);
         ra.addFlashAttribute("status", "お気に入りを解除しました");
         return "redirect:/botanicals/favorite/" + botanicName;

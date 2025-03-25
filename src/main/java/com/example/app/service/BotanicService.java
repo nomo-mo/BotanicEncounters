@@ -22,5 +22,6 @@ public interface BotanicService {
 	void addBotanicImage(Integer botanicId, MultipartFile file);
 
     List<Location> getBotanicLocations();
+	Botanic findByName(String botanicName);
 
 }
