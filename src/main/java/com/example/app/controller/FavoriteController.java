@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.service.FavoriteService;
@@ -18,6 +19,14 @@ import lombok.RequiredArgsConstructor;
 public class FavoriteController {
 
     private final FavoriteService favoriteService;
+    
+ // お気に入り一覧を表示
+    @GetMapping("/list")
+    public String showFavoriteList(@RequestParam Integer userId, Model model) {
+        // ユーザーIDを渡して、お気に入りリストを取得
+        model.addAttribute("favorites", favoriteService.getUserFavorites(userId));
+        return "favorite_list"; // `favorite_list.html` に遷移
+    }
 
     @GetMapping("/{botanicName}")
     public String showFavorite(@PathVariable String botanicName, Model model) {
