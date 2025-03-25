@@ -88,11 +88,7 @@
 
 							<!-- "お気に入り" ボタンを th:each の内側に配置 -->
 							<div class="d-flex justify-content-end">
-								<form th:action="@{/botanicals/favorite/{id}(id=${botanic.id})}" method="post">
-									<button type="submit" class="btn btn-light">♡</button>
-								</form>
-
-							
+								 <a th:href="@{/botanicals/favorite/{id}(id=${botanic.id})}" style="color: rgb(149, 128, 43); font-size: 20px; text-decoration: none">♡</a>
 							</div>
 						</div>
 					</div>

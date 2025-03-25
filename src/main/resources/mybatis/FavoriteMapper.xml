@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.app.mapper.FavoriteMapper">
+
+    <resultMap id="favoriteMap" type="com.example.app.domain.Favorite" autoMapping="true">
+        <association property="botanic" javaType="com.example.app.domain.Botanic">
+            <id property="id" column="botanic_id" />
+            <result property="botanicName" column="botanic_name" />
+            <result property="imagePath" column="image_path" />
+        </association>
+    </resultMap>
+
+    <insert id="insertFavorite" parameterType="com.example.app.domain.Favorite">
+        INSERT INTO favorite (user_id, botanic_id)
+        VALUES (#{userId}, #{botanicId})
+    </insert>
+
+    <delete id="deleteFavorite">
+        DELETE FROM favorite WHERE user_id = #{userId} AND botanic_id = #{botanicId}
+    </delete>
+
+    <select id="selectFavoritesByUserId" resultMap="favoriteMap">
+        SELECT f.botanic_id, b.botanic_name, b.image_path 
+        FROM favorite f
+        JOIN botanicals b ON f.botanic_id = b.id
+        WHERE f.user_id = #{userId}
+    </select>
+
+    <select id="isFavorite" resultType="boolean">
+        SELECT EXISTS (
+            SELECT 1 FROM favorite WHERE user_id = #{userId} AND botanic_id = #{botanicId}
+        )
+    </select>
+
+</mapper>
+

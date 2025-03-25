@@ -26,6 +26,7 @@ public class BotanicController {
 	 private final int NUM_PER_PAGE = 10;
 		
 		private final BotanicService service;
+		
 		private final HttpSession session;
 		
 		@GetMapping
@@ -108,9 +109,6 @@ public class BotanicController {
 		}
 		
 		
-	
-
-		
+	    
 	}	
-		
 		
