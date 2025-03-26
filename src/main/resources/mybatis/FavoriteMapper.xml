@@ -9,30 +9,32 @@
 
     <!-- お気に入り登録 -->
     <insert id="insertFavorite" parameterType="com.example.app.domain.Favorite">
-        INSERT INTO favorites (user_id, botanic_name, image_path)
-        VALUES (#{userId}, #{botanicName}, #{imagePath})
+        INSERT INTO favorites (user_id, botanic_id, image_path)
+        VALUES (#{userId}, #{botanicId}, #{imagePath})
     </insert>
 
     <!-- お気に入り削除 -->
     <delete id="deleteFavorite">
-        DELETE FROM favorites WHERE user_id = #{userId} AND botanic_name = #{botanicName}
+        DELETE FROM favorites WHERE user_id = #{userId} AND botanic_id = #{botanicId}
     </delete>
 
     <!-- ユーザーのお気に入り一覧を取得 -->
     <select id="selectFavoritesByUserId" resultMap="favoriteMap">
-        SELECT botanic_name, image_path 
-        FROM favorites
-        WHERE user_id = #{userId}
+        SELECT f.botanic_id, f.image_path, b.botanic_name
+        FROM favorites f
+        JOIN botanicals b ON f.botanic_id = b.id
+        WHERE f.user_id = #{userId}
     </select>
 
     <!-- すでにお気に入りかどうかをチェック -->
     <select id="isFavorite" resultType="boolean">
         SELECT EXISTS (
-            SELECT 1 FROM favorites WHERE user_id = #{userId} AND botanic_name = #{botanicName}
+            SELECT 1 FROM favorites WHERE user_id = #{userId} AND botanic_id = #{botanicId}
         )
     </select>
 
 </mapper>
+
 
 
 

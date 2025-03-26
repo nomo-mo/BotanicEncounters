@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.app.mapper.UserMapper">
+
+    <!-- ユーザーを追加 -->
+    <insert id="insertUser" parameterType="com.example.app.domain.User">
+        INSERT INTO users (name)
+        VALUES (#{name})
+    </insert>
+
+    <!-- ユーザーIDでユーザーを取得 -->
+    <select id="selectUserById" resultType="com.example.app.domain.User">
+        SELECT id, name
+        FROM users
+        WHERE id = #{id}
+    </select>
+
+    <!-- すべてのユーザーを取得 -->
+    <select id="selectAllUsers" resultType="com.example.app.domain.User">
+        SELECT id, name
+        FROM users
+    </select>
+
+    <!-- ユーザー名でユーザーを取得 -->
+    <select id="selectUserByName" resultType="com.example.app.domain.User">
+        SELECT id, name
+        FROM users
+        WHERE name = #{name}
+    </select>
+
+    <!-- ユーザーを削除 -->
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM users
+        WHERE id = #{id}
+    </delete>
+
+    <!-- ユーザーを更新 -->
+    <update id="updateUser" parameterType="com.example.app.domain.User">
+        UPDATE users
+        SET name = #{name}
+        WHERE id = #{id}
+    </update>
+
+</mapper>
