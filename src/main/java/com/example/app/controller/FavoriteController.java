@@ -36,9 +36,10 @@ public class FavoriteController {
         if (botanic != null) {
             model.addAttribute("botanicName", botanic.getBotanicName());
             model.addAttribute("imagePath", botanic.getImagePath());
+            model.addAttribute("botanicalId", botanic.getId()); // Add the botanicId to the model
         } else {
             model.addAttribute("botanicName", botanicName);
-            model.addAttribute("imagePath", "/static/images/default.jpg"); // 画像がない場合のデフォルト
+            model.addAttribute("imagePath", "/static/images/default.jpg"); // Default image if not found
         }
         return "favorite_save";
     }
@@ -51,7 +52,7 @@ public class FavoriteController {
 
         favoriteService.addFavorite(null, botanicName, imagePath);
         ra.addFlashAttribute("status", "お気に入りに登録しました");
-        return "redirect:/botanicals/favorite/" + botanicName;
+        return "redirect:/botanicals/favorite/list"; // Redirect to the favorites list page
     }
 
     // **お気に入り削除**
@@ -59,7 +60,7 @@ public class FavoriteController {
     public String removeFavorite(@PathVariable String botanicName, RedirectAttributes ra) {
         favoriteService.removeFavorite(null, botanicName);
         ra.addFlashAttribute("status", "お気に入りを解除しました");
-        return "redirect:/botanicals/favorite/" + botanicName;
+        return "redirect:/botanicals/favorite/list"; // Redirect to the favorites list page
     }
 }
 
