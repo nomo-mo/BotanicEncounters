@@ -39,8 +39,8 @@
 						<td th:text="${favorite.createdAt}"></td>
 						<td>
 							<!-- 削除ボタン -->
-							<form th:action="@{'/botanicals/favorite/' + ${favorite.botanicId} + '/unfavorite'}"
-								method="post">
+							<form th:if="${botanicalId}" th:action="@{'/botanicals/favorite/' + ${botanicalId} + '/favorite'}" method="post">
+
 								<button type="submit" class="btn btn-danger">削除</button>
 							</form>
 						</td>

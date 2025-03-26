@@ -30,7 +30,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
-    public boolean isFavorite(Integer userId, String botanicName) {
+    public boolean isFavorite(Integer userId, Integer botanicName) {
         return favoriteMapper.isFavorite(userId, botanicName);
     }
 

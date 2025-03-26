@@ -4,39 +4,44 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.css">
+	<link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
 	<title>お気に入り登録植物一覧</title>
 </head>
 
-<body style="background-color: rgb(208, 210, 208); font-family: 'Cormorant Garamond', serif;">
+<body style="background-color: rgb(221, 223, 221); font-family: 'Cormorant Garamond', serif;">
 
 	<nav th:replace="~{commonP :: navbar}"></nav>
+	
+	<div>
+		<a th:href="@{/botanicalsList}" class="custom-button">BotanicList</a>
+	</div>
 
-      <div class="container my-5">
-		
-        <p th:if="${status}" th:text="${status}" class="status-message"></p>
+	<div class="container my-5" >
+		<div th:if="${botanicName}">
+			<h3 style="padding-bottom: 40px">お気に入りする？</h3>
 
-        <div th:if="${botanicName}">
-            <h3>お気に入り</h3>
-            <p>植物名: <span th:text="${botanicName}"></span></p>
-            <img th:src="@{${imagePath}}" alt="植物画像" style="width: 150px;" th:if="${imagePath}"/>
+			<h5>植物名: <span th:text="${botanicName}"></span></h5>
+			<img th:if="${imagePath}" th:src="@{${imagePath}}" alt="植物画像" style="width: 300px;" />
 
-            <!-- お気に入り登録フォーム -->
-            <form th:action="@{'/botanicals/favorite/' + ${botanicalId} + '/favorite'}" method="post">
-                <button type="submit" class="btn btn-Light">お気に入り登録</button>
-            </form>
+			<!-- お気に入り登録フォーム -->
+			<form th:if="${botanicalId}" th:action="@{'/botanicals/favorite/' + ${botanicalId} + '/favorite'}"
+				method="post">
+				<button type="submit" class="btn btn-outline-secondary" style="margin-top: 20px">お気に入り登録</button>
+			</form>
 
-            <!-- お気に入り解除フォーム -->
-            <form th:action="@{'/botanicals/favorite/' + ${botanicalId} + '/unfavorite'}" method="post">
-                <button type="submit" class="btn btn-Light">お気に入り解除</button>
-            </form>
+			<!-- お気に入り解除フォーム -->
+			<form th:if="${botanicalId}" th:action="@{'/botanicals/favorite/' + ${botanicalId} + '/unfavorite'}"
+				method="post">
+				<button type="submit" class="btn btn-outline-secondary" style="margin-top: 20px">お気に入り解除</button>
+			</form>
 
-            <form th:action="@{'/botanicals/favorite/list'}" method="get">
-                <button type="submit" class="btn btn-Light">お気に入り一覧</button>
-            </form>
-        </div>
-    </div>
+			<form th:action="@{/botanicals/favorite/list}" method="get">
+				<button type="submit" class="btn btn-outline-secondary" style="margin-top: 20px">お気に入り一覧</button>
+			</form>
+		</div>
+	</div>
+
 
 	<footer class="text-center py-3">
 		<p>&copy; 2025 BotanicEncounters</p>
@@ -48,4 +53,3 @@
 </body>
 
 </html>
-

@@ -18,7 +18,7 @@ public interface FavoriteMapper {
 
 
     // すでにお気に入りかどうかをチェック
-    boolean isFavorite(@Param("userId") Integer userId, @Param("botanicId") String botanicName);
+    boolean isFavorite(@Param("userId") Integer userId, @Param("botanicId") Integer botanicName);
 
     // 指定ユーザーのお気に入り一覧を取得
     List<Favorite> selectFavoritesByUserId(Integer userId);

@@ -13,7 +13,7 @@ public interface FavoriteService {
     void removeFavorite(Integer userId, Integer integer);
     
     // すでにお気に入りかどうかをチェック
-    boolean isFavorite(Integer userId, String botanicName);
+    boolean isFavorite(Integer userId, Integer integer);
     
     // 指定ユーザーのお気に入り一覧を取得
     List<Favorite> getUserFavorites(Integer userId);
