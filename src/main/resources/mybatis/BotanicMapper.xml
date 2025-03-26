@@ -11,41 +11,45 @@
 
 	<select id="selectAll" resultMap="botanicMap">
 		SELECT
-		 botanicals.id,
-		 locations.name AS location_name,
-		 botanicals.botanic_name
+		botanicals.id,
+		locations.name AS location_name,
+		botanicals.botanic_name
 		FROM botanicals
 		JOIN locations
-		  ON botanicals.location_id = locations.id
+		ON botanicals.location_id = locations.id
 	</select>
 
-	<select id="selectById" resultMap="botanicMap" parameterType="int">
-		 SELECT
-		 botanicals.id,  
-		 locations.id AS location_id, 
-		 locations.name AS location_name,
-		 botanicals.botanic_cpl, 
-		 botanicals.botanic_name,
-		 botanicals.japanese_name, 
-		 botanicals.scientific_name, 
-		 botanicals.genus_name,
-		 botanicals.description, 
-		 botanicals.image_path
+	<select id="selectById" resultMap="botanicMap"
+		parameterType="int">
+		SELECT
+		botanicals.id,
+		locations.id AS location_id,
+		locations.name AS location_name,
+		botanicals.botanic_cpl,
+		botanicals.botanic_name,
+		botanicals.japanese_name,
+		botanicals.scientific_name,
+		botanicals.genus_name,
+		botanicals.description,
+		botanicals.image_path
 		FROM botanicals
-		JOIN locations
-		  ON botanicals.location_id = locations.id
-		WHERE botanicals.id = #{id}
+		JOIN
+		locations
+		ON botanicals.location_id = locations.id
+		WHERE botanicals.id =
+		#{id}
 	</select>
 
 	<select id="selectLimited" resultMap="botanicMap">
 		SELECT
-		  botanicals.id,
-		  locations.name AS location_name,
-		  botanicals.botanic_name
+		botanicals.id,
+		locations.name AS location_name,
+		botanicals.botanic_name
 		FROM botanicals
 		JOIN locations
-		  ON botanicals.location_id = locations.id
-		LIMIT #{offset}, #{limit}
+		ON botanicals.location_id = locations.id
+		LIMIT #{offset},
+		#{limit}
 	</select>
 
 	<select id="count" resultType="long">
@@ -54,30 +58,45 @@
 
 	<insert id="insert" parameterType="Botanic">
 		INSERT INTO botanicals(
-		    location_id, botanic_cpl, botanic_name, japanese_name,
-		     scientific_name, genus_name, description, image_path
+		location_id, botanic_cpl, botanic_name, japanese_name,
+		scientific_name, genus_name, description, image_path
 		)VALUES(
-		     #{location.id}, #{botanicCpl}, #{botanicName}, #{japaneseName},
-		      #{scientificName}, #{genusName}, #{description}, #{imagePath}
-		      )
+		#{location.id}, #{botanicCpl}, #{botanicName}, #{japaneseName},
+		#{scientificName}, #{genusName}, #{description}, #{imagePath}
+		)
 	</insert>
 
 	<update id="update" parameterType="Botanic">
 		UPDATE botanicals
 		SET
-		location_id = #{location.id}, botanic_cpl = #{botanicCpl}, botanic_name = #{botanicName},
-		japanese_name = #{japaneseName}, scientific_name = #{scientificName}, genus_name = #{genusName},
+		location_id = #{location.id}, botanic_cpl = #{botanicCpl},
+		botanic_name = #{botanicName},
+		japanese_name = #{japaneseName},
+		scientific_name = #{scientificName}, genus_name = #{genusName},
 		description = #{description}, image_path = #{imagePath}
-		WHERE id = #{id}
+		WHERE id =
+		#{id}
 	</update>
 
 	<delete id="delete" parameterType="int">
-		DELETE FROM botanicals WHERE id = #{id}
+		DELETE FROM botanicals WHERE
+		id = #{id}
 	</delete>
-	
-	<select id="findByName" resultType="com.example.app.domain.Botanic">
-    SELECT * FROM botanicals WHERE botanic_name = #{botanicName}
-</select>
-	
+
+	<select id="findByName"
+		resultType="com.example.app.domain.Botanic">
+		SELECT * FROM botanicals WHERE botanic_name =
+		#{botanicName}
+	</select>
+
+	<select id="existsByBotanicName" resultType="boolean">
+		SELECT COUNT(*) > 0
+		FROM botanicals WHERE botanic_name = #{botanicName}
+	</select>
+
+	<select id="existsByBotanicCpl" resultType="boolean">
+		SELECT COUNT(*) > 0 FROM botanicals WHERE botanic_cpl = #{botanicCpl}
+	</select>
+
 
 </mapper>

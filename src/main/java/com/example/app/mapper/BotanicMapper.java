@@ -21,5 +21,7 @@ public interface BotanicMapper {
 	void update(Botanic botanic);
 	void delete(int id);
 	Botanic findByName(String botanicName);
+	boolean existsByBotanicName(String botanicName);
+	boolean existsByBotanicCpl(String botanicCpl);
 	
 }

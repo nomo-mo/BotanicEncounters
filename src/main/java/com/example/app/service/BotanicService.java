@@ -23,5 +23,6 @@ public interface BotanicService {
 
     List<Location> getBotanicLocations();
 	Botanic findByName(String botanicName);
+	boolean isDuplicate(String botanicName, String botanicCpl);
 
 }

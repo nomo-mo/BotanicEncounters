@@ -67,10 +67,7 @@ public class BotanicServiceImpl implements BotanicService {
 	@Override
 	public List<Location> getBotanicLocations() {
 		return locationMapper.selectAll();
-
-}
-
-	
+    }
 
 	@Override
 	public void addBotanicImage(Integer botanicId, MultipartFile file) {
@@ -83,9 +80,9 @@ public class BotanicServiceImpl implements BotanicService {
 		return botanicMapper.findByName(botanicName);
 	}
 
-
-
-	
-
+	@Override
+	public boolean isDuplicate(String botanicName, String botanicCpl) {
+		return botanicMapper.existsByBotanicName(botanicName) || botanicMapper.existsByBotanicCpl(botanicCpl);
+	}
 
 }

@@ -70,6 +70,14 @@ public class BotanicController {
 				model.addAttribute("locationList", service.getBotanicLocations());
 				return "save";
 			}
+			
+			 // 追加: 重複チェック
+		    if (service.isDuplicate(botanic.getBotanicName(), botanic.getBotanicCpl())) {
+		        model.addAttribute("locationList", service.getBotanicLocations());
+		        model.addAttribute("duplicateError", "同じ名前やCPLが既に存在します。");
+		        return "save";
+		    }
+			
 			// エラーがなければ service.addBotanic(botanic) で植物を追加し、リダイレクト時に「追加しました」のメッセージを表示
 			service.addBotanic(botanic);
 			ra.addFlashAttribute("status", "植物を追加しました");
