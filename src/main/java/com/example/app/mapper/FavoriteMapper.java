@@ -14,12 +14,14 @@ public interface FavoriteMapper {
     void insertFavorite(Favorite favorite);
 
     // お気に入り削除
-    void deleteFavorite(@Param("userId") Integer userId, @Param("botanicName") String botanicName);
+    void deleteFavorite(@Param("userId") Integer userId, @Param("botanicId") Integer botanicId);
+
 
     // すでにお気に入りかどうかをチェック
-    boolean isFavorite(@Param("userId") Integer userId, @Param("botanicName") String botanicName);
+    boolean isFavorite(@Param("userId") Integer userId, @Param("botanicId") String botanicName);
 
     // 指定ユーザーのお気に入り一覧を取得
-    List<Favorite> getFavoritesByUserId(Integer userId);
+    List<Favorite> selectFavoritesByUserId(Integer userId);
+
 }
 

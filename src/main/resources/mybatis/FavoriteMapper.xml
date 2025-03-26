@@ -15,8 +15,9 @@
 
     <!-- お気に入り削除 -->
     <delete id="deleteFavorite">
-        DELETE FROM favorites WHERE user_id = #{userId} AND botanic_id = #{botanicId}
-    </delete>
+    DELETE FROM favorites WHERE user_id = #{userId} AND botanic_id = #{botanicId}
+</delete>
+
 
     <!-- ユーザーのお気に入り一覧を取得 -->
     <select id="selectFavoritesByUserId" resultMap="favoriteMap">

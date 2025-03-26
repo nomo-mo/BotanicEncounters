@@ -16,17 +16,17 @@ public class FavoriteServiceImpl implements FavoriteService {
     private final FavoriteMapper favoriteMapper;
 
     @Override
-    public void addFavorite(Integer userId, String botanicName, String imagePath) {
+    public void addFavorite(Integer userId, Integer botanicId, String imagePath) {
         Favorite favorite = new Favorite();
         favorite.setUserId(userId);
-        favorite.setBotanicName(botanicName);
+        favorite.setBotanicId(botanicId);
         favorite.setImagePath(imagePath);
         favoriteMapper.insertFavorite(favorite);
     }
 
     @Override
-    public void removeFavorite(Integer userId, String botanicName) {
-        favoriteMapper.deleteFavorite(userId, botanicName);
+    public void removeFavorite(Integer userId,  Integer botanicId) {
+        favoriteMapper.deleteFavorite(userId, botanicId);
     }
 
     @Override
@@ -36,6 +36,6 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     @Override
     public List<Favorite> getUserFavorites(Integer userId) {
-        return favoriteMapper.getFavoritesByUserId(userId);
+        return favoriteMapper.selectFavoritesByUserId(userId);
     }
 }

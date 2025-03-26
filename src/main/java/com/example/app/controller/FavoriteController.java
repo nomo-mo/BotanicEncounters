@@ -1,5 +1,7 @@
 package com.example.app.controller;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.Botanic;
+import com.example.app.domain.User;
 import com.example.app.service.BotanicService;
 import com.example.app.service.FavoriteService;
+import com.example.app.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,7 +24,8 @@ import lombok.RequiredArgsConstructor;
 public class FavoriteController {
 
     private final FavoriteService favoriteService;
-    private final BotanicService botanicService; // 追加：植物情報を取得するためのサービス
+    private final BotanicService botanicService; // 植物情報を取得するためのサービス
+    private final UserService userService;
 
     // お気に入り一覧を表示
     @GetMapping("/list")
@@ -44,25 +49,31 @@ public class FavoriteController {
         return "favorite_save";
     }
 
-    // **お気に入り登録**
+ // お気に入り登録
     @PostMapping("/{botanicName}/favorite")
-    public String addFavorite(@PathVariable String botanicName, RedirectAttributes ra) {
+    public String addFavorite(@PathVariable String botanicName, RedirectAttributes ra, Principal principal) {
+        String userName = principal.getName(); // ログイン中のユーザー名を取得
+        User user = userService.findByName(userName); // ユーザー情報を取得
         Botanic botanic = botanicService.findByName(botanicName);
         String imagePath = (botanic != null) ? botanic.getImagePath() : "/static/images/default.jpg";
 
-        favoriteService.addFavorite(null, botanicName, imagePath);
+        favoriteService.addFavorite(user.getId(), botanic.getId(), imagePath);
         ra.addFlashAttribute("status", "お気に入りに登録しました");
-        return "redirect:/botanicals/favorite/list"; // Redirect to the favorites list page
+        return "redirect:/botanicals/favorite/list";
     }
 
-    // **お気に入り削除**
+    // お気に入り削除
     @PostMapping("/{botanicName}/unfavorite")
-    public String removeFavorite(@PathVariable String botanicName, RedirectAttributes ra) {
-        favoriteService.removeFavorite(null, botanicName);
+    public String removeFavorite(@PathVariable String botanicName, RedirectAttributes ra, Principal principal) {
+        String userName = principal.getName(); // ログイン中のユーザー名を取得
+        User user = userService.findByName(userName);
+        Botanic botanic = botanicService.findByName(botanicName);
+
+        favoriteService.removeFavorite(user.getId(), botanic.getId());
         ra.addFlashAttribute("status", "お気に入りを解除しました");
-        return "redirect:/botanicals/favorite/list"; // Redirect to the favorites list page
+        return "redirect:/botanicals/favorite/list";
     }
+
+
 }
-
-
 

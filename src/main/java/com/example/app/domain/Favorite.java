@@ -12,5 +12,9 @@ public class Favorite {
 	private String botanicName;
 	private String imagePath; 
 	private LocalDateTime createdAt;
+	public void setBotanicId(Integer botanicId) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
 
 }

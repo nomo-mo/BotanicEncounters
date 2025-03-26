@@ -7,10 +7,10 @@ import com.example.app.domain.Favorite;
 public interface FavoriteService {
     
     // お気に入り登録
-    void addFavorite(Integer userId, String botanicName, String imagePath);
+    void addFavorite(Integer userId, Integer integer, String imagePath);
     
     // お気に入り削除
-    void removeFavorite(Integer userId, String botanicName);
+    void removeFavorite(Integer userId, Integer integer);
     
     // すでにお気に入りかどうかをチェック
     boolean isFavorite(Integer userId, String botanicName);
