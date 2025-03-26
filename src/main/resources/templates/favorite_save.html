@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <title>お気に入り</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+	<title>お気に入り登録植物一覧</title>
 </head>
 
-<body style="background-color: rgb(241, 241, 241); font-family: 'Cormorant Garamond', serif;">
-    <nav th:replace="~{commonP :: navbar}"></nav>
+<body style="background-color: rgb(208, 210, 208); font-family: 'Cormorant Garamond', serif;">
 
-    <div class="container my-5">
+	<nav th:replace="~{commonP :: navbar}"></nav>
+
+      <div class="container my-5">
+		
         <p th:if="${status}" th:text="${status}" class="status-message"></p>
 
         <div th:if="${botanicName}">
@@ -35,12 +38,14 @@
         </div>
     </div>
 
-    <footer class="text-center py-3">
-        <p>&copy; 2025 BotanicEncounters</p>
-    </footer>
+	<footer class="text-center py-3">
+		<p>&copy; 2025 BotanicEncounters</p>
+	</footer>
 
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
+
 </html>
 
