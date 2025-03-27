@@ -55,7 +55,7 @@ public class FavoriteController {
         // Principal が null の場合、ログインしていないユーザーとして処理
         if (principal == null) {
             ra.addFlashAttribute("status", "ログインが必要です");
-            return "redirect:/login";  // ログインページにリダイレクト
+            return "redirect:/botanicalsList";  // ログインページにリダイレクト
         }
 
         String userName = principal.getName(); // ログイン中のユーザー名を取得
@@ -79,7 +79,7 @@ public class FavoriteController {
         
         ra.addFlashAttribute("status", "お気に入りに登録しました");
 
-        return "redirect:/botanicals/favorite/list"; // お気に入りリストへリダイレクト
+        return "redirect:/favorite/list"; // お気に入りリストへリダイレクト
     }
 
 
