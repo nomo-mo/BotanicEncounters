@@ -4,28 +4,28 @@
 
     <!-- ユーザーを追加 -->
     <insert id="insertUser" parameterType="com.example.app.domain.User">
-        INSERT INTO users (name)
-        VALUES (#{name})
+        INSERT INTO users (name, login_id, login_pass)
+        VALUES (#{name}, #{loginId}, #{loginPass})
     </insert>
 
     <!-- ユーザーIDでユーザーを取得 -->
     <select id="selectUserById" resultType="com.example.app.domain.User">
-        SELECT id, name
+        SELECT id, name, login_id, login_pass
         FROM users
         WHERE id = #{id}
     </select>
 
     <!-- すべてのユーザーを取得 -->
     <select id="selectAllUsers" resultType="com.example.app.domain.User">
-        SELECT id, name
+        SELECT id, name, login_id, login_pass
         FROM users
     </select>
 
     <!-- ユーザー名でユーザーを取得 -->
-    <select id="selectUserByName" resultType="com.example.app.domain.User">
-        SELECT id, name
+    <select id="findByName" resultType="com.example.app.domain.User">
+        SELECT id, name, login_id, login_pass
         FROM users
-        WHERE name = #{name}
+        WHERE name = #{userName}
     </select>
 
     <!-- ユーザーを削除 -->
@@ -37,8 +37,16 @@
     <!-- ユーザーを更新 -->
     <update id="updateUser" parameterType="com.example.app.domain.User">
         UPDATE users
-        SET name = #{name}
+        SET name = #{name}, login_id = #{loginId}, login_pass = #{loginPass}
         WHERE id = #{id}
     </update>
 
+    <!-- **ログイン用: login_id と password でユーザーを取得** -->
+    <select id="findByLoginIdAndPassword" resultType="com.example.app.domain.User">
+        SELECT id, name, login_id, login_pass
+        FROM users
+        WHERE login_id = #{loginId} AND login_pass = #{loginPass}
+    </select>
+
 </mapper>
+
