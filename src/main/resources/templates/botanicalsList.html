@@ -57,23 +57,22 @@
 		<form th:action="@{/botanicals/search}" method="get" class="search_container d-flex justify-content-start"
 			style="margin-bottom: 20px;">
 			<input type="text" name="keyword" size="25" placeholder="キーワード検索" th:value="${searchKeyword}"
-				class="form-control me-2" style="max-width: 300px;">
+				class="form-control me-2" style="max-width: 250px;">
 			<input type="submit" value="検索" class="btn btn-outline-secondary">
 		</form>
 
-		<form th:action="@{/botanicals/category}" method="get" class="d-flex align-items-center" style="gap: 10px;">
-			<!--  <label for="category">カテゴリー：</label>  -->
-			<select name="category" id="category">
-				<option value="観葉植物">観葉植物</option>
-				<option value="生花">生花</option>
-				<option value="植栽">植栽</option>
-				<option value="オージープランツ">オージープランツ</option>
-				<option value="草花">草花</option>
-				<option value="その他">その他</option>
-			</select>
-			<button type="submit" class="btn btn-outline-secondary">検索</button>
-			<p>選択中のカテゴリー: <span th:text="${selectedCategory}" class="selected-category"></span></p>
-		</form>
+		<form th:action="@{/botanicals/category}" method="get" class="d-flex align-items-center" style="gap: 10px; width: 100%;  padding: 0px; border-radius: 5px;">
+    <select name="category" id="category" style="width: 200px; padding: 8px; border: 1px solid rgb(149, 128, 43); border-radius: 5px;">
+        <option value="観葉植物">観葉植物</option>
+        <option value="生花">生花</option>
+        <option value="植栽">植栽</option>
+        <option value="オージープランツ">オージープランツ</option>
+        <option value="草花">草花</option>
+        <option value="その他">その他</option>
+    </select>
+    <button type="submit" class="btn btn-outline-secondary">検索</button>
+    <p>選択中のカテゴリー: <span th:text="${selectedCategory}" class="selected-category"></span></p>
+</form>
 
 		<div class="row">
 			<!-- 植物リストの繰り返し表示 -->
