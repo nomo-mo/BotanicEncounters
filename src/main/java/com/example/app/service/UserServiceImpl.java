@@ -53,6 +53,12 @@ public class UserServiceImpl implements UserService {
 	public User findByName(String userName) {
 		return userMapper.findByName(userName);
 	}
+
+	@Override
+	public User getAuthenticatedUser(String loginId, String loginPass) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
     
     
 }

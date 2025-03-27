@@ -1,24 +1,14 @@
 package com.example.app.domain;
 
+import lombok.Data;
+
+@Data
 public class User {
-    private int id;
+	
+    private Integer id;
     private String name;
+    private String loginId;
+    private String loginPass;
 
-    // getter, setter を追加
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
 

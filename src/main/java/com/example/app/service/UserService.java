@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.app.domain.User;
 
 public interface UserService {
+	
     // ユーザーを追加
     void addUser(User user);
 
@@ -24,4 +25,6 @@ public interface UserService {
     void updateUser(User user);
 
 	User findByName(String userName);
+
+	User getAuthenticatedUser(String loginId, String loginPass);
 }
