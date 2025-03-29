@@ -7,10 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.app.domain.Botanic;
 import com.example.app.service.HomeService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -21,8 +23,9 @@ public class HomeController {
 		
 
     @GetMapping("/home")
-    public String home() {
-        return "index";                        // templates/index.html を返
+    public String home(HttpSession session) {
+        session.setAttribute("keepAlive", true); // セッションを維持するためのダミー属性
+        return "index";                    // templates/index.html を返
     }
     
     @GetMapping("/botanicalsList")
@@ -54,6 +57,13 @@ public class HomeController {
         return "botanicalsList";
     }
    
+    @GetMapping("/keepSessionAlive")
+    @ResponseBody
+    public String keepSessionAlive(HttpSession session) {
+        session.setAttribute("keepAlive", true);
+        return "OK";
+    }
+
 
     
 }

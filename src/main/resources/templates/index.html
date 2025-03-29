@@ -17,12 +17,19 @@
 		</div>
 	</header>
 
+	<script>
+		setInterval(function () {
+			fetch('/keepSessionAlive', {method: 'GET'});
+		}, 5 * 60 * 1000); // 5分ごとにリクエスト送信
+	</script>
+
+
 	<div>
 		<a th:href="@{/botanicalsList}" class="custom-button">BotanicList</a>
 	</div>
 	<div>
-	   <a th:href="@{/}" class="custom-button2">Admin Login</a>
-	</div>  
+		<a th:href="@{/}" class="custom-button2">Admin Login</a>
+	</div>
 
 	<main class="container">
 		<section>
@@ -43,7 +50,8 @@
 					<div class="carousel-item active">
 						<img th:src="@{/images/D-1.jpg}" class="d-block w-70" alt="Sample Image">
 						<div class="carousel-caption d-none d-md-block text-center">
-							<h4 class="text-white">I'm thinking about how to showcase <br>the beauty and ephemerality of fresh flowers.</h4>
+							<h4 class="text-white">I'm thinking about how to showcase <br>the beauty and ephemerality of
+								fresh flowers.</h4>
 						</div>
 					</div>
 					<div class="carousel-item">
