@@ -2,39 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.app.mapper.FavoriteMapper">
 
+    <!-- お気に入りのマッピング -->
     <resultMap id="favoriteMap" type="com.example.app.domain.Favorite" autoMapping="true">
+        <result property="id" column="id" />
+        <result property="userId" column="user_id" />
+        <result property="botanicId" column="botanic_id" />
+        <result property="folderNo" column="folder_no" />
+        <result property="folderName" column="folder_name" />
         <result property="botanicName" column="botanic_name" />
         <result property="imagePath" column="image_path" />
+        <result property="createdAt" column="created_at" />
     </resultMap>
 
     <!-- お気に入り登録 -->
     <insert id="insertFavorite" parameterType="com.example.app.domain.Favorite">
-        INSERT INTO favorites (user_id, botanic_id, image_path)
-        VALUES (#{userId}, #{botanicId}, #{imagePath})
+        INSERT INTO favorites (user_id, botanic_id, folder_no, folder_name, image_path)
+        VALUES (#{userId}, #{botanicId}, #{folderNo}, #{folderName}, #{imagePath})
     </insert>
 
     <!-- お気に入り削除 -->
     <delete id="deleteFavorite">
-    DELETE FROM favorites WHERE user_id = #{userId} AND botanic_id = #{botanicId}
-</delete>
-
+        DELETE FROM favorites WHERE user_id = #{userId} AND botanic_id = #{botanicId}
+    </delete>
 
     <!-- ユーザーのお気に入り一覧を取得 -->
     <select id="selectFavoritesByUserId" resultMap="favoriteMap">
-        SELECT f.botanic_id, f.image_path, b.botanic_name
+        SELECT f.id, f.user_id, f.botanic_id, f.folder_no, f.folder_name, f.image_path, f.created_at,
+               b.botanic_name
         FROM favorites f
         JOIN botanicals b ON f.botanic_id = b.id
         WHERE f.user_id = #{userId}
+        ORDER BY f.created_at DESC
     </select>
 
     <!-- すでにお気に入りかどうかをチェック -->
-    <select id="isFavorite" resultType="boolean">
-        SELECT EXISTS (
-            SELECT 1 FROM favorites WHERE user_id = #{userId} AND botanic_id = #{botanicId}
-        )
+    <select id="isFavorite" resultType="int">
+        SELECT COUNT(*) 
+        FROM favorites 
+        WHERE user_id = #{userId} AND botanic_id = #{botanicId}
     </select>
 
 </mapper>
+
 
 
 

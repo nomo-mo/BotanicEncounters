@@ -1,5 +1,6 @@
 package com.example.app.config;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.example.app.filter.AdminAuthFilter;
 
 @Configuration
+@MapperScan("com.example.app.mapper")  // Mapper のパッケージをスキャン
 public class ApplicationConfig implements WebMvcConfigurer {
 
     @Override

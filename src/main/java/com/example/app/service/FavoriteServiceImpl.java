@@ -21,21 +21,22 @@ public class FavoriteServiceImpl implements FavoriteService {
         favorite.setUserId(userId);
         favorite.setBotanicId(botanicId);
         favorite.setImagePath(imagePath);
+        
         favoriteMapper.insertFavorite(favorite);
     }
 
     @Override
-    public void removeFavorite(Integer userId,  Integer botanicId) {
+    public void removeFavorite(Integer userId, Integer botanicId) {
         favoriteMapper.deleteFavorite(userId, botanicId);
     }
 
     @Override
-    public boolean isFavorite(Integer userId, Integer botanicName) {
-        return favoriteMapper.isFavorite(userId, botanicName);
+    public boolean isFavorite(Integer userId, Integer botanicId) {
+        return favoriteMapper.selectFavorite(userId, botanicId) != null;
     }
 
     @Override
     public List<Favorite> getUserFavorites(Integer userId) {
-        return favoriteMapper.selectFavoritesByUserId(userId);
+        return favoriteMapper.selectUserFavorites(userId);
     }
 }

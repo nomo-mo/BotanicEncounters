@@ -12,12 +12,12 @@
 <body style="background-color: rgb(216, 218, 216); font-family: 'Cormorant Garamond', serif;">
 
 	<nav th:replace="~{commonP :: navbar}"></nav>
-	
+
 	<div>
 		<a th:href="@{/botanicalsList}" class="custom-button">BotanicList</a>
 	</div>
 
-	<div class="container my-5" >
+	<div class="container my-5">
 		<div th:if="${botanicName}">
 			<h3 style="padding-bottom: 40px">お気に入りする？</h3>
 
@@ -25,13 +25,13 @@
 			<img th:if="${imagePath}" th:src="@{${imagePath}}" alt="植物画像" style="width: 300px;" />
 
 			<!-- お気に入り登録フォーム -->
-			<form th:if="${botanicalId}" th:action="@{'/botanicals/favorite/' + ${botanicalId} + '/favorite'}"
+			<form th:if="${botanicalId}" th:action="@{/botanicals/favorite/{id}/favorite(id=${botanicalId})}"
 				method="post">
 				<button type="submit" class="btn btn-outline-secondary" style="margin-top: 20px">お気に入り登録</button>
 			</form>
 
 			<!-- お気に入り解除フォーム -->
-			<form th:if="${botanicalId}" th:action="@{'/botanicals/favorite/' + ${botanicalId} + '/unfavorite'}"
+			<form th:if="${botanicalId}" th:action="@{/botanicals/favorite/{id}/unfavorite(id=${botanicalId})}"
 				method="post">
 				<button type="submit" class="btn btn-outline-secondary" style="margin-top: 20px">お気に入り解除</button>
 			</form>
