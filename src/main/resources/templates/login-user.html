@@ -6,16 +6,16 @@
 <body>
 	<div class="container mt-5">
 		<div class="row">
-			<div class="col-lg-4 offset-lg-4" th:object="${admin}">
-				<form th:action="@{/login}" method="post">
-
-					<h2 class="h3 text-center mb-3 fw-normal">BotanicEncounters<br>admin</h2>
+			<div class="col-lg-4 offset-lg-4" th:object="${login}">
+				<form th:action="@{/user/login}" method="post">
+					<h2 class="h3 text-center mb-3 fw-normal">BotanicEncounters<br>user</h2>
 
 					<div class="form-floating">
 						<input th:field="*{loginId}" type="text" class="form-control rounded-0 rounded-top"
 							id="floatingInput" placeholder="ログインID" />
 						<label for="floatingInput">ログインID</label>
 					</div>
+					<div th:errors="*{loginId}" class="alert alert-danger my-2"></div>
 
 					<div class="form-floating mb-3">
 						<input th:field="*{loginPass}" type="password"
@@ -23,22 +23,15 @@
 							placeholder="パスワード" />
 						<label for="floatingPassword">パスワード</label>
 					</div>
-					<div th:if="${#fields.hasErrors('loginPass')}" class="alert alert-danger my-2">
-						<p th:errors="*{loginPass}"></p>
-					</div>
-
+					<div th:errors="*{loginPass}" class="alert alert-danger my-2"></div>
 
 					<input class="w-100 btn btn-lg btn-dark mb-3" type="submit" value="ログイン" />
 				</form>
-
-				<div th:errors="*{loginId}" class="alert alert-danger my-2"></div>
-				<div th:errors="*{loginPass}" class="alert alert-danger my-2"></div>
 
 				<div th:if="${status != null}" class="alert alert-success my-2">[[${status}]]</div>
 			</div>
 		</div>
 	</div>
-	<!-- /.container -->
 	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 

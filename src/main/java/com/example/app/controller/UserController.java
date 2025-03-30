@@ -1,10 +1,14 @@
 package com.example.app.controller;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.User;
@@ -14,45 +18,115 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Controller
+@RequestMapping("/admin/user")
+@RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
-    private final HttpSession session;
+	private static final int NUM_PER_PAGE = 5;
 
-    // ユーザーログイン画面を表示
-    @GetMapping("/user/login")
-    public String showLoginForm(Model model) {
-        model.addAttribute("user", new User());
-        return "user_login";  // user_login.html へ遷移
-    }
+	private final UserService service;
+	private final HttpSession session;
 
-    // ユーザーログイン処理
-    @PostMapping("/user/login")
-    public String loginCheck(@Valid User user, Errors errors, RedirectAttributes ra) {
-        if (errors.hasErrors()) {
-            return "user_login";
-        }
+	@GetMapping("/list")
+	public String list(
+			@RequestParam(name="page", defaultValue="1") Integer page,
+			Model model) throws Exception {
+		// 詳細・追加・編集ページから戻る際に利用
+		session.setAttribute("page", page);
+				
+		int totalPages = service.getTotalPages(NUM_PER_PAGE);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("currentPage", page);
+		model.addAttribute("userList", service.getUserListPerPage(page, NUM_PER_PAGE));
+		return "admin/list-user";
+	}
 
-        User authUser = userService.getAuthenticatedUser(user.getLoginId(), user.getLoginPass());
-        if (authUser == null) {
-            errors.rejectValue("loginId", "wrong_id_or_pass", "ログインIDまたはパスワードが間違っています");
-            return "user_login";
-        }
+	@GetMapping("/add")
+	public String add(Model model) {
+		User user = new User();
+		model.addAttribute("user", user);
+		model.addAttribute("heading", "ユーザーの追加");
+		return "admin/save-user";
+	}
 
-        session.setAttribute("userSession", authUser);    // 一般ユーザー 
-        ra.addFlashAttribute("status", "ログインしました");
-        System.out.println("ユーザーログイン成功！ /home へリダイレクト");
-        return "redirect:/home"; // ホームページへリダイレクト
-    }
+	@PostMapping("/add")
+	public String add(
+			@Valid User user,
+			Errors errors,
+			Model model,
+			RedirectAttributes redirectAttributes) throws Exception {
 
-    // ユーザーログアウト
-    @GetMapping("/user/logout")
-    public String userLogout(RedirectAttributes ra) {
-        session.removeAttribute("userSession");  // 一般ユーザーのセッションのみ削除
-        ra.addFlashAttribute("status", "ログアウトしました");
-        return "redirect:/user/login";
-    }
+		if(!user.getLoginId().isBlank()) {
+			if(service.isExsitingUser(user.getLoginId())) {
+				errors.rejectValue("loginId", "error.existing_user_loginId");
+			}
+		}
+
+		if(errors.hasErrors()) {
+			model.addAttribute("heading", "ユーザーの追加");
+			return "admin/save-user";
+		}
+
+		service.addUser(user);
+		redirectAttributes.addFlashAttribute("message", "ユーザーを追加しました。");
+		
+		// 追加後に戻るページ(⇒最終ページ)
+		int totalPages = service.getTotalPages(NUM_PER_PAGE);
+		return "redirect:/admin/user/list?page=" + totalPages;
+	}
+
+	@GetMapping("/edit/{id}")
+	public String edit(
+			@PathVariable Integer id,
+			Model model) throws Exception {
+		model.addAttribute("user", service.getUserById(id));
+		model.addAttribute("heading", "ユーザーの追加");
+		return "admin/save-user";
+	}
+
+	@PostMapping("/edit/{id}")
+	public String edit(
+			@PathVariable Integer id,
+			@Valid User user,
+			Errors errors,
+			Model model,
+			RedirectAttributes redirectAttributes) throws Exception {
+
+		String originalLoginId = service.getUserById(id).getLoginId();
+
+		if(!user.getLoginId().isBlank()) {
+			if(!originalLoginId.equals(user.getLoginId()) && service.isExsitingUser(user.getLoginId())) {
+				errors.rejectValue("loginId", "error.existing_user_loginId");
+			}
+		}
+
+		if(errors.hasErrors()) {
+			model.addAttribute("heading", "ユーザーの編集");
+			return "admin/save-user";
+		}
+
+		service.editUser(user);
+		redirectAttributes.addFlashAttribute("message", "ユーザーを編集しました。");
+		
+		// 編集後に戻るページ(元のページ)
+		int previousPage = (int) session.getAttribute("page");
+		return "redirect:/admin/user/list?page=" + previousPage;
+	}
+
+	@GetMapping("/delete/{id}")
+	public String delete(
+			@PathVariable Integer id,
+			RedirectAttributes redirectAttributes) throws Exception {
+		service.deleteUserById(id);
+		redirectAttributes.addFlashAttribute("message", "ユーザーを削除しました。");
+		
+		// 削除後に戻るページ(⇒ページ数が減って、元のページが無くなった場合は最終ページ)
+		int previousPage = (int) session.getAttribute("page");
+		int totalPages = service.getTotalPages(NUM_PER_PAGE);
+		int page = previousPage <= service.getTotalPages(NUM_PER_PAGE) ? previousPage : totalPages;
+		return "redirect:/admin/user/list?page=" + page;
+	}
+
 }
 

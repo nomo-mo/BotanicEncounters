@@ -6,25 +6,18 @@ import com.example.app.domain.User;
 
 public interface UserService {
 	
-    // ユーザーを追加
-    void addUser(User user);
+	// すべてのユーザーを取得
+    List<User> getUserList();
 
     // IDでユーザーを取得
-    User getUserById(int id);
-
-    // すべてのユーザーを取得
-    List<User> getAllUsers();
-
-    // ユーザー名でユーザーを取得
-    User getUserByName(String name);
-
-    // ユーザーを削除
-    void removeUser(int id);
-
-    // ユーザー情報を更新
-    void updateUser(User user);
+    User getUserById(Integer id);
+    User getUserByLoginId(String logingId);
+	void deleteUserById(Integer id);
+	void addUser(User user);
+	void editUser(User user);
+	boolean isExsitingUser(String loginId);
+	List<User> getUserListPerPage(int page, int numPerPage);
+    int getTotalPages(int numPerPage);
 
 	User findByName(String userName);
-
-	User getAuthenticatedUser(String loginId, String loginPass);
 }

@@ -3,29 +3,30 @@ package com.example.app.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.app.domain.User;
 
 @Mapper
 public interface UserMapper {
 	
-    // ユーザーを追加
-    void insertUser(User user);
-
+	 // すべてのユーザーを取得
+    List<User> selectAll();
+    
     // IDでユーザーを取得
-    User selectUserById(int id);
-
-    // すべてのユーザーを取得
-    List<User> selectAllUsers();
-
-    // ユーザー名でユーザーを取得
-    User selectUserByName(String name);
-
+    User selectById(Integer id);
+    
+    User selectByLoginId(String loginId);  
+    
+    void setDeleteById(Integer id); 
+ 
     // ユーザーを削除
-    void deleteUser(int id);
-
+    void insert(User user); 
+    
     // ユーザー情報を更新
-    void updateUser(User user);
+    void update(User user); 
+    
+    List<User> selectLimited(@Param("offset") int offset, @Param("num") int num); 
 
-	User findByName(String userName);
+    long countActive();
 }

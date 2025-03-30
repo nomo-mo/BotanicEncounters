@@ -2,51 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.app.mapper.UserMapper">
 
+    <!-- IDでユーザーを取得 -->
+    <select id="selectById" parameterType="java.lang.Integer" resultType="User">
+        SELECT * FROM users WHERE id = #{id}
+    </select>
+
+    <!-- ログインIDでユーザーを取得 -->
+    <select id="selectByLoginId" parameterType="java.lang.String" resultType="User">
+        SELECT * FROM users WHERE login_id = #{loginId}
+    </select>
+
+    <!-- ユーザーを削除 -->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM users WHERE id = #{id}
+    </delete>
+
     <!-- ユーザーを追加 -->
-    <insert id="insertUser" parameterType="com.example.app.domain.User">
+    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO users (name, login_id, login_pass)
         VALUES (#{name}, #{loginId}, #{loginPass})
     </insert>
 
-    <!-- ユーザーIDでユーザーを取得 -->
-    <select id="selectUserById" resultType="com.example.app.domain.User">
-        SELECT id, name, login_id, login_pass
-        FROM users
-        WHERE id = #{id}
-    </select>
-
-    <!-- すべてのユーザーを取得 -->
-    <select id="selectAllUsers" resultType="com.example.app.domain.User">
-        SELECT id, name, login_id, login_pass
-        FROM users
-    </select>
-
-    <!-- ユーザー名でユーザーを取得 -->
-    <select id="findByName" resultType="com.example.app.domain.User">
-        SELECT id, name, login_id, login_pass
-        FROM users
-        WHERE name = #{userName}
-    </select>
-
-    <!-- ユーザーを削除 -->
-    <delete id="deleteUser" parameterType="int">
-        DELETE FROM users
-        WHERE id = #{id}
-    </delete>
-
-    <!-- ユーザーを更新 -->
-    <update id="updateUser" parameterType="com.example.app.domain.User">
+    <!-- ユーザー情報を更新 -->
+    <update id="update" parameterType="User">
         UPDATE users
         SET name = #{name}, login_id = #{loginId}, login_pass = #{loginPass}
         WHERE id = #{id}
     </update>
 
-    <!-- **ログイン用: login_id と password でユーザーを取得** -->
-    <select id="findByLoginIdAndPassword" resultType="com.example.app.domain.User">
-        SELECT id, name, login_id, login_pass
-        FROM users
-        WHERE login_id = #{loginId} AND login_pass = #{loginPass}
-    </select>
-
 </mapper>
+
 

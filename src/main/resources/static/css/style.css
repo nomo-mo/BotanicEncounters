@@ -208,6 +208,46 @@ h6 {
 }
 /* ボタン */
 
+/* ボタン3 */
+.custom-button3 {
+  display: inline-block;
+  text-decoration: none;
+  color: rgb(97, 98, 89);
+  border: solid 1px rgb(172, 148, 91);
+  padding: 35px 40px;
+  position: relative;
+  font-size: 16px;
+  font-weight: bold;
+  background: transparent;
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  z-index: 1000; /* 他の要素より前面に */
+}
+
+
+.custom-button3::before,
+.custom-button3::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -7px;
+  height: 1px;
+  background-color: rgb(172, 148, 91);
+}
+
+.custom-button3::before {
+  width: 60px;
+  transform: translate(30px, 0px);
+}
+
+.custom-button3::after {
+  width: 15px;
+  transform-origin: right center;
+  transform: translate(30px, 0px) rotate(25deg);
+}
+/* ボタン3 */
+
 /* ボタン2 */
 .custom-button2 {
   display: inline-block;
