@@ -30,16 +30,24 @@ public class FavoriteController {
 	// お気に入り一覧を表示
 	@GetMapping("/list")
 	public String showFavoriteList(Model model, Principal principal) {
-	    if (principal == null) {
-	        return "redirect:/botanicalsList";  // ログインが必要なら植物リストへ戻る
-	    }
+		 if (principal == null) {
+		        System.out.println("principalがnullです。ログインページへリダイレクト");
+		        return "redirect:/user/login";  // **ユーザーログインページへリダイレクト**
+		    }
 
-	    String userName = principal.getName();
-	    User user = userService.findByName(userName);
+		    String userName = principal.getName();
+		    System.out.println("取得したユーザー名: " + userName);
+
+		User user = userService.findByName(userName);
+	    if (user == null) {
+	        System.out.println("ユーザーが見つかりません。ログインページへリダイレクト");
+	        return "redirect:/user/login";
+	    }
 
 	    model.addAttribute("favorites", favoriteService.getUserFavorites(user.getId()));
 	    return "favorite_list";
 	}
+
 
 
 	// **お気に入り詳細を表示**
@@ -62,16 +70,16 @@ public class FavoriteController {
 	public String addFavorite(@PathVariable Integer botanicId, RedirectAttributes ra, Principal principal) {
 		if (principal == null) {
 			ra.addFlashAttribute("status", "ログインが必要です");
-			return "redirect:/botanicalsList";
+			return "redirect:/user/login"; 
 		}
 
-		String userName = principal.getName();
-		User user = userService.findByName(userName);
+		String loginId = principal.getName();
+		User user = userService.findByName(loginId);
 		Botanic botanic = botanicService.getBotanicById(botanicId);
 
 		if (botanic == null) {
-			ra.addFlashAttribute("status", "植物が見つかりませんでした");
-			 return "redirect:/botanicals/favorite/list"; 
+			ra.addFlashAttribute("status", "植物が見つかりません");
+			return "redirect:/botanicals/favorite/list";
 		}
 
 		// **重複登録を防ぐ**
@@ -81,8 +89,7 @@ public class FavoriteController {
 		}
 
 		// お気に入り登録処理
-		String imagePath = botanic.getImagePath() != null ? botanic.getImagePath() : "/static/images/default.jpg";
-		favoriteService.addFavorite(user.getId(), botanic.getId(), imagePath);
+		favoriteService.addFavorite(user.getId(), botanic.getId(), botanic.getImagePath());
 
 		ra.addFlashAttribute("status", "お気に入りに登録しました");
 		return "redirect:/botanicals/favorite/list";
@@ -93,7 +100,7 @@ public class FavoriteController {
 	public String removeFavorite(@PathVariable Integer botanicId, RedirectAttributes ra, Principal principal) {
 	    if (principal == null) {
 	        ra.addFlashAttribute("status", "ログインが必要です");
-	        return "redirect:/botanicalsList";
+	        return "redirect:/botanicals/favorite/list";
 	    }
 
 	    String userName = principal.getName();
@@ -102,12 +109,12 @@ public class FavoriteController {
 
 	    if (botanic == null) {
 	        ra.addFlashAttribute("status", "植物が見つかりませんでした");
-	        return "redirect:/favorite/list";
+	        return "redirect:/botanicals/favorite/list";
 	    }
 
 	    favoriteService.removeFavorite(user.getId(), botanic.getId());
 	    ra.addFlashAttribute("status", "お気に入りを解除しました");
-	    return "redirect:/favorite/list";
+	    return "redirect:/botanicals/favorite/list";
 	}
 
 

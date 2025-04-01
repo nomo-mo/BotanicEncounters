@@ -53,7 +53,9 @@ public class UserLoginController {
 				.loginId(user.getLoginId())
 				.build();
 		session.setAttribute("loginStatus", loginStatus);
-		return "redirect:/botanicalsList";
+		System.out.println("ログイン成功: " + loginStatus.getName()); // デバッグ用
+		
+		return "redirect:/botanicals/favorite/list";
 	}
 
 	@GetMapping("/logout")

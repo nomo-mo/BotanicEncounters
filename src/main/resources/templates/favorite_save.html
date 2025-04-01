@@ -36,9 +36,10 @@
 				<button type="submit" class="btn btn-outline-secondary" style="margin-top: 20px">お気に入り解除</button>
 			</form>
 
-			<form th:action="@{/botanicals/favorite/list}" method="get">
-				<button type="submit" class="btn btn-outline-secondary" style="margin-top: 20px">お気に入り一覧</button>
-			</form>
+			<a th:href="@{/botanicals/favorite/list}" class="btn btn-outline-secondary" style="margin-top: 20px">
+				お気に入り一覧
+			</a>
+
 		</div>
 	</div>
 

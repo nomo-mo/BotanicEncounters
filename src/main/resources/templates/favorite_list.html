@@ -32,11 +32,15 @@
 				<tbody>
 					<tr th:each="favorite : ${favorites}">
 						<td th:text="${favorite.botanicName}"></td>
-						<td><img th:src="@{${favorite.imagePath}(default='/static/images/default.jpg')}" alt="植物画像"
-								style="width: 100px;"></td>
+						<td><img th:if="${favorite.imagePath != null}" th:src="@{${favorite.imagePath}}" alt="植物画像"
+								style="width: 100px;">
+							<img th:if="${favorite.imagePath == null}" th:src="@{/static/images/default.jpg}"
+								alt="デフォルト画像" style="width: 100px;">
+						</td>
 						<td th:text="${favorite.createdAt}"></td>
 						<td>
-							<form th:action="@{/botanicals/favorite/{id}/unfavorite(id=${favorite.botanicId})}" method="post">
+							<form th:action="@{/botanicals/favorite/{id}/unfavorite(id=${favorite.botanicId})}"
+								method="post">
 								<button type="submit" class="btn btn-danger">削除</button>
 							</form>
 						</td>
@@ -51,8 +55,6 @@
 	</footer>
 
 	<script src="js/jquery-2.1.4.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
 	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
-
 </html>
