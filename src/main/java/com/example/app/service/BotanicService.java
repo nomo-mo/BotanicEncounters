@@ -10,7 +10,7 @@ import com.example.app.domain.Location;
 public interface BotanicService {
 	
 	List<Botanic> getAllBotanic();
-	Botanic getBotanicById(Integer id);
+	Botanic getBotanicById(Integer botanicId);
 	
 	// ページ分割機能用
     List<Botanic> getItemsByPage(int page, int numPerPage);

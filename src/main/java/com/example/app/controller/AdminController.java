@@ -21,7 +21,7 @@ public class AdminController {
 	private final AdminService service;                      //管理者認証処理
 	private final HttpSession session;                       //ログインした管理者情報をセッションに保存するための HttpSession インスタンス
 	
-	@GetMapping                                       // ルート URL (/) への GET リクエストを処理
+	@GetMapping("/admin")                                   // ルート URL (/) への GET リクエストを処理
 	public String showLoginForm(Model model) {
 		model.addAttribute("admin", new Admin());            // 空の Admin オブジェクトを作成し、Thymeleaf のフォームバインディングで使用する
 		return "login";                                     // src/main/resources/templates/login.html を表示

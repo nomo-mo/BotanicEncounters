@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 public class FavoriteServiceImpl implements FavoriteService {
     
     private final FavoriteMapper favoriteMapper;
+    private final BotanicService botanicService; 
 
     @Override
     public void addFavorite(Integer userId, Integer botanicId, String imagePath) {
@@ -21,6 +22,14 @@ public class FavoriteServiceImpl implements FavoriteService {
         favorite.setUserId(userId);
         favorite.setBotanicId(botanicId);
         favorite.setImagePath(imagePath);
+        
+        // Botanic名の取得
+        String botanicName = botanicService.getBotanicById(botanicId).getBotanicName();
+        favorite.setBotanicName(botanicName);
+        
+        // フォルダー情報も必要に応じてセット
+        favorite.setFolderNo(1);
+        favorite.setFolderName("未分類");
         
         favoriteMapper.insertFavorite(favorite);
     }
@@ -37,6 +46,11 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     @Override
     public List<Favorite> getUserFavorites(Integer userId) {
-        return favoriteMapper.selectUserFavorites(userId);
+        List<Favorite> favorites = favoriteMapper.selectUserFavorites(userId);
+        for (Favorite f : favorites) {
+            System.out.println("植物名: " + f.getBotanicName()); // ←ここでチェック
+        }
+        return favorites;
     }
+
 }

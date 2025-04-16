@@ -14,5 +14,8 @@ public class Favorite {
 	private String folderName;
 	private String imagePath; 
 	private LocalDateTime createdAt;
+	private String botanicName;
+		
+	}
 
-}
+

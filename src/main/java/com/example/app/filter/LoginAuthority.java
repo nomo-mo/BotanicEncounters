@@ -1,7 +1,8 @@
 package com.example.app.filter;
 
-public class LoginAuthority {
+public enum LoginAuthority {
 
-	public static final Object USER = null;
+	 USER,
+	 ADMIN
 
 }

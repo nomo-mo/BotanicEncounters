@@ -25,12 +25,12 @@ public class BotanicServiceImpl implements BotanicService {
 	}
 
 	@Override
-	public Botanic getBotanicById(Integer id) {
-		if(id == null) {
+	public Botanic getBotanicById(Integer botanicId) {
+		if(botanicId == null) {
 			return null;
 		}
 		
-		return botanicMapper.selectById(id);
+		return botanicMapper.selectById(botanicId);
 	}
 
 	@Override

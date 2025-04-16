@@ -22,7 +22,7 @@ public class HomeController {
 	private final HomeService homeService;     // 植物データを取得するためのサービス (HomeService) を依存注入
 		
 
-    @GetMapping("/home")
+    @GetMapping
     public String home(HttpSession session) {
         session.setAttribute("keepAlive", true); // セッションを維持するためのダミー属性
         return "index";                    // templates/index.html を返

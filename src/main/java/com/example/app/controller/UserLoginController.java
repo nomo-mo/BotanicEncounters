@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.Login;
 import com.example.app.domain.User;
+import com.example.app.filter.LoginAuthority;
 import com.example.app.filter.LoginStatus;
 import com.example.app.service.UserService;
 
@@ -51,6 +52,7 @@ public class UserLoginController {
 				.id(user.getId())
 				.name(user.getName())
 				.loginId(user.getLoginId())
+				.authority(LoginAuthority.USER)
 				.build();
 		session.setAttribute("loginStatus", loginStatus);
 		System.out.println("ログイン成功: " + loginStatus.getName()); // デバッグ用
